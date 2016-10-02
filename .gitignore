@@ -1,3 +1,12 @@
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+target/*
+nb-configuration.xml
+
 *.class
 
 # Mobile Tools for Java (J2ME)
