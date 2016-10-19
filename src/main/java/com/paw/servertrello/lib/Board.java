@@ -12,7 +12,7 @@ import java.util.List;
  * @author Jakub
  */
 public class Board {
-    private long id;
+    private Long id;
     private String title;
     private List<CardList> lists;
 
@@ -50,5 +50,12 @@ public class Board {
         this.lists = lists;
     }
 
-
+    @Override
+    public String toString() {
+        return "Board{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", lists=" + lists +
+                '}';
+    }
 }

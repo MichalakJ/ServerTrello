@@ -17,19 +17,24 @@ public class BoardsController implements ModelDriven<Object> {
 
 
     private static final long serialVersionUID = 89268916175477696L;
-    private Board model = new Board();
-    private String id;
+    private Board board = new Board();
+    private Long id;
     private Collection<Board> list;
 
 
 
     public HttpHeaders show() {
+        System.out.println("called "+id);
+        board = BoardService.find(id);
         return new DefaultHttpHeaders("show").disableCaching();
     }
 
-    public HttpHeaders update() {
-        //BoardService.save(model);
-        return new DefaultHttpHeaders("update");
+    public HttpHeaders create() {
+        if(board==null){
+            return new DefaultHttpHeaders("create").withStatus(400);
+        }
+        long newBoardId = BoardService.save(board);
+        return new DefaultHttpHeaders("create").withStatus(201).setLocation(Long.toString(newBoardId));
     }
 
     public HttpHeaders index() {
@@ -39,17 +44,22 @@ public class BoardsController implements ModelDriven<Object> {
 
     @Override
     public Object getModel() {
-        return (list != null ? list : model);
+        return (list != null ? list : board);
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
-        if (id != null) {
-            this.model = BoardService.find(id);
-        }
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public Board getBoard() {
+        return board;
+    }
+
+    public void setBoard(Board board) {
+        this.board = board;
     }
 }

@@ -13,8 +13,8 @@ import java.util.Map;
  * Created by Jakub on 2016-10-19.
  */
 public class BoardService {
-    public static Map Boards = new HashMap();
-
+    public static Map boards = new HashMap();
+    public static long keyId;
     static{
         Card card1 = new Card(1, "card2");
         Card card2 = new Card(2, "card1");
@@ -27,15 +27,21 @@ public class BoardService {
         ArrayList<CardList> cardLists= new ArrayList<>();
 
         cardLists.add(cardList);
-        Boards.put("1", new Board(1, "boardTitle", cardLists));
-        Boards.put("2", new Board(2, "boardTitle2", cardLists));
+        boards.put(++keyId, new Board(1, "boardTitle", cardLists));
+        boards.put(++keyId, new Board(2, "boardTitle2", cardLists));
     }
 
     public static List findAll() {
-        return new ArrayList(Boards.values());
+        return new ArrayList(boards.values());
     }
 
-    public static Board find(String id) {
-        return (Board)Boards.get(id);
+    public static Board find(Long id) {
+        return (Board)boards.get(id);
+    }
+
+    public static long save(Board board) {
+        board.setId(++keyId);
+        boards.put(keyId, board);
+        return keyId;
     }
 }
