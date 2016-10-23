@@ -50,7 +50,7 @@ public class CardListService {
         }
         CardList cardList = CardListConverter.convertFromEntityToDto(cardListTable);
         cardList.setListItems(CardService.getCardsByListId(id));
-        return cardList
+        return cardList;
     }
 
     public static long save(CardList cardList) {
