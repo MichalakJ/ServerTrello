@@ -20,6 +20,10 @@ public class CardList {
         this.listItems = listItems;
     }
 
+    public CardList() {
+
+    }
+
     public long getId() {
         return id;
     }

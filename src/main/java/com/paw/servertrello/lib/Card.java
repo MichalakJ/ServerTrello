@@ -18,6 +18,10 @@ public class Card {
         this.title = title;
     }
 
+    public Card() {
+
+    }
+
     public long getId() {
         return id;
     }

@@ -3,6 +3,8 @@ package com.paw.servertrello.actions;
 import com.paw.servertrello.lib.Board;
 import com.paw.servertrello.lib.Card;
 import com.paw.servertrello.lib.CardList;
+import com.paw.servertrello.persistance.BoardTable;
+import com.paw.servertrello.persistance.Converters.BoardConverter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,19 +18,8 @@ public class BoardService {
     public static Map boards = new HashMap();
     public static long keyId;
     static{
-        Card card1 = new Card(1, "card2");
-        Card card2 = new Card(2, "card1");
-        ArrayList<Card> cardList1 = new ArrayList<>();
-        cardList1.add(card1);
-        cardList1.add(card2);
-
-        CardList cardList = new CardList(1, cardList1);
-
-        ArrayList<CardList> cardLists= new ArrayList<>();
-
-        cardLists.add(cardList);
-        boards.put(++keyId, new Board(1, "boardTitle", cardLists));
-        boards.put(++keyId, new Board(2, "boardTitle2", cardLists));
+        boards.put(++keyId, new BoardTable(1L, "boardTitle"));
+        boards.put(++keyId, new BoardTable(2L, "boardTitle2"));
     }
 
     public static List findAll() {
@@ -36,12 +27,30 @@ public class BoardService {
     }
 
     public static Board find(Long id) {
-        return (Board)boards.get(id);
+        BoardTable boardTable = (BoardTable)boards.get(id);
+        if(boardTable==null){
+            return null;
+        }
+        Board board = BoardConverter.convertFromEntityToDto(boardTable);
+        board.setLists(CardListService.getListsByBoardId(id));
+        return board;
     }
 
     public static long save(Board board) {
-        board.setId(++keyId);
-        boards.put(keyId, board);
+        BoardTable boardTable = new BoardTable(++keyId, board.getTitle());
+        boards.put(keyId, boardTable);
         return keyId;
+    }
+
+    public static void delete(Long id) {
+        boards.remove(id);
+    }
+
+    public static int update(Board board, Long id) {
+        if(!boards.containsKey(id)){
+            return 404;
+        }
+        boards.replace(id, new BoardTable(id, board.getTitle()));
+        return 200;
     }
 }

@@ -26,6 +26,11 @@ public class Board {
 
     }
 
+    public Board(int i, String boardTitle) {
+        this.id = id;
+        this.title = title;
+    }
+
     public long getId() {
         return id;
     }

@@ -9,6 +9,8 @@ import org.apache.struts2.rest.HttpHeaders;
 
 
 import java.util.Collection;
+import javax.servlet.http.HttpServletRequest;
+import org.apache.struts2.ServletActionContext;
 
 /**
  * Created by Jakub on 2016-10-19.
@@ -24,8 +26,10 @@ public class BoardsController implements ModelDriven<Object> {
 
 
     public HttpHeaders show() {
-        System.out.println("called "+id);
         board = BoardService.find(id);
+        if(board==null){
+            return new DefaultHttpHeaders("show").disableCaching().withStatus(404);
+        }
         return new DefaultHttpHeaders("show").disableCaching();
     }
 
@@ -34,12 +38,22 @@ public class BoardsController implements ModelDriven<Object> {
             return new DefaultHttpHeaders("create").withStatus(400);
         }
         long newBoardId = BoardService.save(board);
-        return new DefaultHttpHeaders("create").withStatus(201).setLocation(Long.toString(newBoardId));
+        String path=ServletActionContext.getRequest().getRequestURI();
+        return new DefaultHttpHeaders("create").withStatus(201).setLocation(path + Long.toString(newBoardId));
     }
 
     public HttpHeaders index() {
         list = BoardService.findAll();
         return new DefaultHttpHeaders("index").disableCaching();
+    }
+
+    public HttpHeaders destroy(){
+        BoardService.delete(id);
+        return new DefaultHttpHeaders("destroy").disableCaching().withStatus(204);
+    }
+
+    public HttpHeaders update(){
+        return new DefaultHttpHeaders("update").disableCaching().withStatus(BoardService.update(board, id));
     }
 
     @Override
