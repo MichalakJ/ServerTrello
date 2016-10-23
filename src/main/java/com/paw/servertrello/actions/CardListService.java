@@ -24,6 +24,8 @@ public class CardListService {
     static{
         CardListTable cardListTable = new CardListTable(++keyId, 1L);
         cardLists.put(keyId, cardListTable);
+        CardListTable cardListTable2 = new CardListTable(++keyId, 5L);
+        cardLists.put(keyId, cardListTable2);
     }
 
     public static List<CardList> getListsByBoardId(long boardId){
@@ -39,5 +41,32 @@ public class CardListService {
         }
 
         return cardListsDto;
+    }
+
+    public static CardList find(Long id) {
+        CardListTable cardListTable = (CardListTable) cardLists.get(id);
+        if(cardListTable == null){
+            return null;
+        }
+        CardList cardList = CardListConverter.convertFromEntityToDto(cardListTable);
+        cardList.setListItems(CardService.getCardsByListId(id));
+        return cardList
+    }
+
+    public static long save(CardList cardList) {
+        CardListTable cardListTable = new CardListTable();
+        cardListTable.setBoardId(cardList.getBoardId());
+        cardListTable.setId(++keyId);
+        cardLists.put(keyId, cardListTable);
+        return keyId;
+    }
+
+    public static int delete(Long id) {
+        if(cardLists.containsKey(id)){
+            cardLists.remove(id);
+            return 204;
+        }
+        return 404;
+
     }
 }

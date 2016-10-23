@@ -12,6 +12,10 @@ public class CardListTable {
         this.boardId = boardId;
     }
 
+    public CardListTable() {
+
+    }
+
     public Long getId() {
         return id;
     }

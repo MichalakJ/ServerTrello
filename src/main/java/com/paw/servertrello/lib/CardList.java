@@ -13,10 +13,17 @@ import java.util.List;
  */
 public class CardList {
     long id;
+    long boardId;
     List<Card> listItems;
 
     public CardList(long id, List<Card> listItems) {
         this.id = id;
+        this.listItems = listItems;
+    }
+
+    public CardList(long id, long boardId, List<Card> listItems) {
+        this.id = id;
+        this.boardId = boardId;
         this.listItems = listItems;
     }
 
@@ -38,5 +45,13 @@ public class CardList {
 
     public void setListItems(List<Card> listItems) {
         this.listItems = listItems;
+    }
+
+    public long getBoardId() {
+        return boardId;
+    }
+
+    public void setBoardId(long boardId) {
+        this.boardId = boardId;
     }
 }

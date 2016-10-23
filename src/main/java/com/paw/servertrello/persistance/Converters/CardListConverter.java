@@ -11,6 +11,7 @@ public class CardListConverter {
     public static CardList convertFromEntityToDto(CardListTable cardListTable) {
         CardList cardList = new CardList();
         cardList.setId(cardListTable.getId());
+        cardList.setBoardId(cardListTable.getBoardId());
         return cardList;
 
     }
