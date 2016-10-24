@@ -51,4 +51,15 @@ public class BoardAccessService {
         }
         return accessList;
     }
+
+    public static List<Long> getAccessesByUserId(Long id) {
+        List<Long> accessList = new ArrayList<>();
+        for (Object value : accesses.values()) {
+            BoardAccessTable boardAccessTable = (BoardAccessTable) value;
+            if(boardAccessTable.getUserId().equals(id)){
+                accessList.add(boardAccessTable.getBoardId());
+            }
+        }
+        return accessList;
+    }
 }
