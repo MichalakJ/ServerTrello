@@ -14,6 +14,7 @@ import java.util.List;
 public class CardList {
     long id;
     long boardId;
+    String title;
     List<Card> listItems;
 
     public CardList(long id, List<Card> listItems) {
@@ -53,5 +54,13 @@ public class CardList {
 
     public void setBoardId(long boardId) {
         this.boardId = boardId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

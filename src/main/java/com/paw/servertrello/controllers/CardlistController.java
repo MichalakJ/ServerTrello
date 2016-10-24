@@ -3,6 +3,7 @@ package com.paw.servertrello.controllers;
 import com.opensymphony.xwork2.ModelDriven;
 import com.paw.servertrello.actions.BoardService;
 import com.paw.servertrello.actions.CardListService;
+import com.paw.servertrello.actions.CardService;
 import com.paw.servertrello.lib.Board;
 import com.paw.servertrello.lib.CardList;
 import org.apache.struts2.ServletActionContext;
@@ -37,6 +38,11 @@ public class CardlistController implements ModelDriven<Object> {
 
     public HttpHeaders destroy(){
         return new DefaultHttpHeaders("destroy").disableCaching().withStatus(CardListService.delete(id));
+    }
+
+    public HttpHeaders update(){
+        CardListService.update(id, cardList);
+        return new DefaultHttpHeaders("update").disableCaching();
     }
 
     @Override

@@ -12,7 +12,16 @@ public class CardListConverter {
         CardList cardList = new CardList();
         cardList.setId(cardListTable.getId());
         cardList.setBoardId(cardListTable.getBoardId());
+        cardList.setTitle(cardListTable.getTitle());
         return cardList;
 
+    }
+
+    public static CardListTable convertFromDtoToEntity(CardList cardList) {
+        CardListTable cardListTable = new CardListTable();
+        cardListTable.setId(cardList.getId());
+        cardListTable.setBoardId(cardList.getBoardId());
+        cardListTable.setTitle(cardList.getTitle());
+        return cardListTable;
     }
 }

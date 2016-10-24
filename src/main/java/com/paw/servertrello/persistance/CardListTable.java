@@ -6,6 +6,7 @@ package com.paw.servertrello.persistance;
 public class CardListTable {
     private Long id;
     private Long boardId;
+    private String title;
 
     public CardListTable(Long id, Long boardId) {
         this.id = id;
@@ -30,5 +31,13 @@ public class CardListTable {
 
     public void setBoardId(Long boardId) {
         this.boardId = boardId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

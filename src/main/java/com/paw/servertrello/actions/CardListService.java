@@ -69,4 +69,13 @@ public class CardListService {
         return 404;
 
     }
+
+    public static int update(Long id, CardList cardList) {
+        if (!cardLists.containsKey(id)) {
+            return 404;
+        }
+        CardListTable cardListTable = CardListConverter.convertFromDtoToEntity(cardList);
+        cardLists.replace(id, cardListTable);
+        return 200;
+    }
 }
