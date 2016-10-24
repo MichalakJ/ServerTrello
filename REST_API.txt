@@ -1,0 +1,148 @@
+REST api:  
+#Wszystkie POSTY same generują id dla swoich obiektów i zwracją location header na nowo utworzony obiekt.
+#PUT zastępuje całkowicie obiekt TODO: określić dokładnie logike PUT.
+BOARDS  
+
+GET	  /ServerTrello/boards  
+GET	  /ServerTrello/boards/{id}  
+{
+  "id": 1,
+  "lists": [
+    {
+      "boardId": 1,
+      "id": 1,
+      "listItems": [
+        {
+          "cardListId": 1,
+          "id": 1,
+          "title": "card2"
+        },
+        {
+          "cardListId": 1,
+          "id": 2,
+          "title": "card1"
+        }
+      ],
+      "title": ""
+    },
+    {
+      "boardId": 1,
+      "id": 4,
+      "listItems": [],
+      "title": ""
+    }
+  ],
+  "title": "boardTitle",
+  "usersAccesses": [
+    1
+  ]
+}
+DELETE  /ServerTrello/boards/{id}  
+PUT     /ServerTrello/boards/{id}  
+POST	/ServerTrello/boards  
+{
+	  "title":"nowy board"
+} 
+
+ 
+CARDLIST
+
+GET	    /ServerTrello/cardlist/{id}  
+{
+  "boardId": 1,
+  "id": 1,
+  "listItems": [
+    {
+      "cardListId": 1,
+      "id": 1,
+      "title": "card2"
+    },
+    {
+      "cardListId": 1,
+      "id": 2,
+      "title": "card1"
+    }
+  ],
+  "title": ""
+}
+PUT     /ServerTrello/cardlist/{id}
+POST    /ServerTrello/cardlist  
+{
+	  "title":"nowy cardlist",
+	  "boardId": "1"
+}
+DELETE  /ServerTrello/cardlist/{id}
+
+
+CARD
+
+GET  /ServerTrello/card/{id}
+{
+  "cardListId": 1,
+  "id": 1,
+  "title": "card2"
+}
+PUT   /ServerTrello/card
+POST  /ServerTrello/card
+{
+  "cardListId": 1,
+  "title": "card2"
+}
+DELETE /ServerTrello/card/{id}
+
+
+BOARDSACCESS
+#endpointy do kontroli który użytkownik ma dostęp do której tablicy.
+#w przyszłości być może typ dostępu?
+GET  /ServerTrello/boardsaccess
+[
+  {
+    "boardId": 1,
+    "id": 1,
+    "userId": 1
+  },
+  {
+    "boardId": 2,
+    "id": 2,
+    "userId": 1
+  }
+]
+POST /ServerTrello/boardsaccess
+  {
+    "boardId": 2,
+    "userId": 3
+  }
+DELETE /ServerTrello/boardsaccess/{id}
+
+USER
+#boards oznacza listę boardów do których użytkownik ma dostęp (dane z board access table).
+GET  /ServerTrello/user/{id}
+{
+  "about": "kisne z tym serwerem",
+  "boards": [
+    1,
+    2
+  ],
+  "email": "a@b.com",
+  "fullname": "test user the mighty",
+  "id": 1,
+  "name": "testUser"
+}
+POST /ServerTrello/user
+{
+  "about": "kisne z tym serwerem",
+  "email": "a@b.com",
+  "fullname": "test user the mighty",
+  "name": "testUser2"
+}
+DELETE /ServerTrello/user/{id}
+
+LOGIN
+#brak sprawdzania hasła. zostanie sprawdzony tylko czy w userach istnieje dany login
+#i zostanie zwrócony location header do danego usera.
+POST /ServerTrello/login
+
+{
+	  "login":"testUser",
+	  "password": "sa"
+}
