@@ -32,7 +32,7 @@ public class CardListService {
         ArrayList<CardList> cardListsDto = new ArrayList<>();
         for (Object value : cardLists.values()) {
             CardListTable cardListTable = (CardListTable)value;
-            if(cardListTable.getBoardId()==boardId){
+            if(cardListTable.getBoardId().equals(boardId)){
                 CardList cardList = CardListConverter.convertFromEntityToDto(cardListTable);
                 cardList.setListItems(CardService.getCardsByListId(cardListTable.getId()));
                 cardListsDto.add(cardList);

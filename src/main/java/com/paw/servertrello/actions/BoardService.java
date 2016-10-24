@@ -31,6 +31,7 @@ public class BoardService {
         }
         Board board = BoardConverter.convertFromEntityToDto(boardTable);
         board.setLists(CardListService.getListsByBoardId(id));
+        board.setUsersAccesses(BoardAccessService.getAccessesByBoardId(id));
         return board;
     }
 

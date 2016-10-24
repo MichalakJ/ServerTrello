@@ -14,6 +14,7 @@ import java.util.List;
 public class Board {
     private Long id;
     private String title;
+    private List<Long> usersAccesses;
     private List<CardList> lists;
 
     public Board(long id, String title, List<CardList> lists) {
@@ -53,6 +54,14 @@ public class Board {
 
     public void setLists(List<CardList> lists) {
         this.lists = lists;
+    }
+
+    public List<Long> getUsersAccesses() {
+        return usersAccesses;
+    }
+
+    public void setUsersAccesses(List<Long> usersAccesses) {
+        this.usersAccesses = usersAccesses;
     }
 
     @Override
