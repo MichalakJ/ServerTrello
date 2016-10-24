@@ -26,7 +26,7 @@ public class BoardsaccessController implements ModelDriven<Object>{
 
     public HttpHeaders create() {
         long newId = BoardAccessService.save(boardAccess);
-        String path = ServletActionContext.getRequest().getRequestURI();
+        String path= ServletActionContext.getRequest().getRequestURL().toString();
         return new DefaultHttpHeaders("create").withStatus(201).setLocation(path + "/" + Long.toString(newId));
     }
 

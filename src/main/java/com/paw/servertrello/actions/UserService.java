@@ -60,4 +60,16 @@ public class UserService {
         users.remove(id);
         return 204;
     }
+
+    public static User getUser(String login) {
+        for (Object value : users.values()) {
+            UserTable userTable = (UserTable) value;
+            if (userTable.getName().equals(login)) {
+                User user = UserConverter.convertFromEntityToDto(userTable);
+                user.setBoards(BoardAccessService.getAccessesByUserId(user.getId()));
+                return user;
+            }
+        }
+        return null;
+    }
 }

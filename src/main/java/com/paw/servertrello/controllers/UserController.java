@@ -30,7 +30,7 @@ public class UserController implements ModelDriven<Object>{
 
     public HttpHeaders create() {
         long newId = UserService.save(user);
-        String path= ServletActionContext.getRequest().getRequestURI();
+        String path= ServletActionContext.getRequest().getRequestURL().toString();
         return new DefaultHttpHeaders("create").withStatus(201).setLocation(path + "/" + Long.toString(newId));
     }
 

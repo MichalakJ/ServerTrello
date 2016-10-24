@@ -38,7 +38,7 @@ public class BoardsController implements ModelDriven<Object> {
             return new DefaultHttpHeaders("create").withStatus(400);
         }
         long newBoardId = BoardService.save(board);
-        String path=ServletActionContext.getRequest().getRequestURI();
+        String path= ServletActionContext.getRequest().getRequestURL().toString();
         return new DefaultHttpHeaders("create").withStatus(201).setLocation(path + Long.toString(newBoardId));
     }
 
