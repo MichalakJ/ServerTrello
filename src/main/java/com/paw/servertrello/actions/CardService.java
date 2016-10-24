@@ -35,4 +35,28 @@ public class CardService {
         }
         return cardList;
     }
+
+    public static Card find(Long id) {
+        Card card;
+        if(!cards.containsKey(id)){
+            return null;
+        }
+        card = CardConverter.convertFromEntityToDto((CardTable) cards.get(id));
+        return card;
+    }
+
+    public static long save(Card card) {
+        CardTable cardTable = CardConverter.convertFromDtoToEntity(card);
+        cardTable.setId(++keyId);
+        cards.put(keyId, cardTable);
+        return keyId;
+    }
+
+    public static int delete(Long id) {
+        if(!cards.containsKey(id)){
+            return 404;
+        }
+        cards.remove(id);
+        return 204;
+    }
 }

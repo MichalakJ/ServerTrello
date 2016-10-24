@@ -11,6 +11,15 @@ public class CardConverter {
         Card card = new Card();
         card.setId(cardTable.getId());
         card.setTitle(cardTable.getTitle());
+        card.setCardListId(cardTable.getCardListId());
         return card;
+    }
+
+    public static CardTable convertFromDtoToEntity(Card card) {
+        CardTable cardTable = new CardTable();
+        cardTable.setId(card.getId());
+        cardTable.setTitle(card.getTitle());
+        cardTable.setCardListId(card.getCardListId());
+        return cardTable;
     }
 }

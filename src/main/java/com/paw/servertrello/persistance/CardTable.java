@@ -14,6 +14,10 @@ public class CardTable {
         this.title = title;
     }
 
+    public CardTable() {
+
+    }
+
     public Long getId() {
         return id;
     }

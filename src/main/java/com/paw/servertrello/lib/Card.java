@@ -10,8 +10,9 @@ package com.paw.servertrello.lib;
  * @author Jakub
  */
 public class Card {
-    long id;
-    String title;
+    private long id;
+    private String title;
+    private long cardListId;
 
     public Card(long id, String title) {
         this.id = id;
@@ -36,5 +37,13 @@ public class Card {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public long getCardListId() {
+        return cardListId;
+    }
+    //
+    public void setCardListId(long cardListId) {
+        this.cardListId = cardListId;
     }
 }
