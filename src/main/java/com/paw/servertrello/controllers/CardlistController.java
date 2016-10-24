@@ -33,7 +33,7 @@ public class CardlistController implements ModelDriven<Object> {
     public HttpHeaders create() {
         long newId = CardListService.save(cardList);
         String path= ServletActionContext.getRequest().getRequestURL().toString();
-        return new DefaultHttpHeaders("create").withStatus(201).setLocation(path + Long.toString(newId));
+        return new DefaultHttpHeaders("create").withStatus(201).setLocation(path + "/" + Long.toString(newId));
     }
 
     public HttpHeaders destroy(){
