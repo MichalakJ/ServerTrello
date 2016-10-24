@@ -1,7 +1,7 @@
 package com.paw.servertrello.persistance.Converters;
 
 import com.paw.servertrello.lib.Board;
-import com.paw.servertrello.persistance.BoardTable;
+import com.paw.servertrello.persistance.model.BoardTable;
 
 /**
  * Created by Jakub on 2016-10-23.

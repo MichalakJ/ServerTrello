@@ -1,4 +1,4 @@
-package com.paw.servertrello.persistance;
+package com.paw.servertrello.persistance.model;
 
 /**
  * Created by Jakub on 2016-10-23.

@@ -1,9 +1,7 @@
 package com.paw.servertrello.actions;
 
 import com.paw.servertrello.lib.Board;
-import com.paw.servertrello.lib.Card;
-import com.paw.servertrello.lib.CardList;
-import com.paw.servertrello.persistance.BoardTable;
+import com.paw.servertrello.persistance.model.BoardTable;
 import com.paw.servertrello.persistance.Converters.BoardConverter;
 
 import java.util.ArrayList;

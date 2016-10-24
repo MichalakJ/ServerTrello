@@ -1,7 +1,7 @@
 package com.paw.servertrello.persistance.Converters;
 
 import com.paw.servertrello.lib.CardList;
-import com.paw.servertrello.persistance.CardListTable;
+import com.paw.servertrello.persistance.model.CardListTable;
 
 /**
  * Created by Jakub on 2016-10-23.
