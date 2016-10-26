@@ -8,6 +8,7 @@ import org.apache.struts2.rest.DefaultHttpHeaders;
 import org.apache.struts2.rest.HttpHeaders;
 
 
+import java.io.IOException;
 import java.util.Collection;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.ServletActionContext;
@@ -39,6 +40,11 @@ public class BoardsController implements ModelDriven<Object> {
         }
         long newBoardId = BoardService.save(board);
         String path= ServletActionContext.getRequest().getRequestURL().toString();
+        try {
+            ServletActionContext.getResponse().sendRedirect(path + "/" + Long.toString(newBoardId));
+        } catch (IOException e) {
+            return new DefaultHttpHeaders("create").withStatus(201).setLocation(path + "/" + Long.toString(newBoardId));
+        }
         return new DefaultHttpHeaders("create").withStatus(201).setLocation(path + "/" + Long.toString(newBoardId));
     }
 
