@@ -12,6 +12,7 @@ import org.apache.struts2.rest.HttpHeaders;
 
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Created by Jakub on 2016-10-24.
