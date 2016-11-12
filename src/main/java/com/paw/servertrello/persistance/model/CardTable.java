@@ -7,6 +7,7 @@ public class CardTable {
     private Long id;
     private Long cardListId;
     private String title;
+    boolean archived;
 
     public CardTable(Long id, Long cardListId, String title) {
         this.id = id;
@@ -16,6 +17,14 @@ public class CardTable {
 
     public CardTable() {
 
+    }
+
+    public boolean isArchived() {
+        return archived;
+    }
+
+    public void setArchived(boolean archived) {
+        this.archived = archived;
     }
 
     public Long getId() {

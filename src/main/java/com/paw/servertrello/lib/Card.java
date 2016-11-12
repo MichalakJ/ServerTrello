@@ -13,6 +13,7 @@ public class Card {
     private long id;
     private String title;
     private long cardListId;
+    private boolean archived;
 
     public Card(long id, String title) {
         this.id = id;
@@ -21,6 +22,14 @@ public class Card {
 
     public Card() {
 
+    }
+
+    public boolean isArchived() {
+        return archived;
+    }
+
+    public void setArchived(boolean archived) {
+        this.archived = archived;
     }
 
     public long getId() {

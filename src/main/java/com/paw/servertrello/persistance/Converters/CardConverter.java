@@ -12,6 +12,7 @@ public class CardConverter {
         card.setId(cardTable.getId());
         card.setTitle(cardTable.getTitle());
         card.setCardListId(cardTable.getCardListId());
+        card.setArchived(cardTable.isArchived());
         return card;
     }
 
@@ -20,6 +21,7 @@ public class CardConverter {
         cardTable.setId(card.getId());
         cardTable.setTitle(card.getTitle());
         cardTable.setCardListId(card.getCardListId());
+        cardTable.setArchived(card.isArchived());
         return cardTable;
     }
 }
