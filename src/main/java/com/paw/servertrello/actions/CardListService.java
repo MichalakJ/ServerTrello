@@ -75,6 +75,7 @@ public class CardListService {
             return 404;
         }
         CardListTable cardListTable = CardListConverter.convertFromDtoToEntity(cardList);
+        cardListTable.setId(id);
         cardLists.replace(id, cardListTable);
         return 200;
     }
