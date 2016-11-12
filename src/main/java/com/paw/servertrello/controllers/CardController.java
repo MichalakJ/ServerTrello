@@ -6,6 +6,7 @@ import com.paw.servertrello.actions.CardService;
 import com.paw.servertrello.lib.Card;
 import com.paw.servertrello.lib.CardList;
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.rest.DefaultHttpHeaders;
 import org.apache.struts2.rest.HttpHeaders;
 
@@ -14,6 +15,7 @@ import java.util.Collection;
 /**
  * Created by Jakub on 2016-10-24.
  */
+@InterceptorRef("myStack")
 public class CardController implements ModelDriven<Object> {
 
     private static final long serialVersionUID = 99142516175417696L;

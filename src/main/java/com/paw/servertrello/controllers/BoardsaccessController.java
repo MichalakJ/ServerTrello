@@ -6,6 +6,7 @@ import com.paw.servertrello.actions.BoardService;
 import com.paw.servertrello.lib.Board;
 import com.paw.servertrello.lib.BoardAccess;
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.rest.DefaultHttpHeaders;
 import org.apache.struts2.rest.HttpHeaders;
 
@@ -14,6 +15,7 @@ import java.util.Collection;
 /**
  * Created by Jakub on 2016-10-24.
  */
+@InterceptorRef("myStack")
 public class BoardsaccessController implements ModelDriven<Object>{
     private BoardAccess boardAccess = new BoardAccess();
     private Long id;

@@ -4,6 +4,7 @@ package com.paw.servertrello.controllers;
 import com.opensymphony.xwork2.ModelDriven;
 import com.paw.servertrello.actions.BoardService;
 import com.paw.servertrello.lib.Board;
+import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.rest.DefaultHttpHeaders;
 import org.apache.struts2.rest.HttpHeaders;
 
@@ -16,6 +17,7 @@ import org.apache.struts2.ServletActionContext;
 /**
  * Created by Jakub on 2016-10-19.
  */
+@InterceptorRef("myStack")
 public class BoardsController implements ModelDriven<Object> {
 
 

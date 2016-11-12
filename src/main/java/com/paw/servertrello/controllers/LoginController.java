@@ -5,12 +5,14 @@ import com.paw.servertrello.actions.LoginService;
 import com.paw.servertrello.lib.Credentials;
 import com.paw.servertrello.lib.User;
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.rest.DefaultHttpHeaders;
 import org.apache.struts2.rest.HttpHeaders;
 
 /**
  * Created by Jakub on 2016-10-24.
  */
+@InterceptorRef("myStack")
 public class LoginController implements ModelDriven<Object>{
 
     private User user = new User();
