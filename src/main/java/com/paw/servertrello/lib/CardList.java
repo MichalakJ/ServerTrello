@@ -14,6 +14,7 @@ import java.util.List;
 public class CardList {
     long id;
     long boardId;
+    boolean archived;
     String title;
     List<Card> listItems;
 
@@ -30,6 +31,15 @@ public class CardList {
 
     public CardList() {
 
+    }
+
+
+    public boolean isArchived() {
+        return archived;
+    }
+
+    public void setArchived(boolean archived) {
+        this.archived = archived;
     }
 
     public long getId() {

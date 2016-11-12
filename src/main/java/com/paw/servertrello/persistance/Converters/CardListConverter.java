@@ -13,6 +13,7 @@ public class CardListConverter {
         cardList.setId(cardListTable.getId());
         cardList.setBoardId(cardListTable.getBoardId());
         cardList.setTitle(cardListTable.getTitle());
+        cardList.setArchived(cardListTable.isArchived());
         return cardList;
 
     }
@@ -22,6 +23,7 @@ public class CardListConverter {
         cardListTable.setId(cardList.getId());
         cardListTable.setBoardId(cardList.getBoardId());
         cardListTable.setTitle(cardList.getTitle());
+        cardListTable.setArchived(cardList.isArchived());
         return cardListTable;
     }
 }

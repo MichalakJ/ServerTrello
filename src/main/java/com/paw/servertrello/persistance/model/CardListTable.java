@@ -6,15 +6,25 @@ package com.paw.servertrello.persistance.model;
 public class CardListTable {
     private Long id;
     private Long boardId;
+    private boolean archived;
     private String title;
 
     public CardListTable(Long id, Long boardId) {
         this.id = id;
         this.boardId = boardId;
+        this.archived = false;
     }
 
     public CardListTable() {
 
+    }
+
+    public boolean isArchived() {
+        return archived;
+    }
+
+    public void setArchived(boolean archived) {
+        this.archived = archived;
     }
 
     public Long getId() {
