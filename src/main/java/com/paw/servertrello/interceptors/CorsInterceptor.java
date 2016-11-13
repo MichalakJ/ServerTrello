@@ -11,7 +11,10 @@ import javax.servlet.http.HttpServletResponse;
  * Created by Jakub on 2016-11-12.
  */
 public class CorsInterceptor implements Interceptor{
-    @Override
+
+	private static final long serialVersionUID = 1L;
+
+	@Override
     public void destroy() {
 
     }

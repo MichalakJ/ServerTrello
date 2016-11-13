@@ -1,52 +1,42 @@
 package com.paw.servertrello.controllers;
 
 import com.opensymphony.xwork2.ModelDriven;
-import com.paw.servertrello.actions.BoardAccessService;
-import com.paw.servertrello.actions.BoardService;
-import com.paw.servertrello.lib.Board;
-import com.paw.servertrello.lib.BoardAccess;
-import org.apache.struts2.ServletActionContext;
+import com.paw.servertrello.lib.BoardAccessModel;
 import org.apache.struts2.convention.annotation.InterceptorRef;
-import org.apache.struts2.rest.DefaultHttpHeaders;
-import org.apache.struts2.rest.HttpHeaders;
-
 import java.util.Collection;
 
-/**
- * Created by Jakub on 2016-10-24.
- */
 @InterceptorRef("myStack")
 public class BoardsaccessController implements ModelDriven<Object>{
-    private BoardAccess boardAccess = new BoardAccess();
+    private BoardAccessModel boardAccess = new BoardAccessModel();
     private Long id;
-    private Collection<BoardAccess> list;
+    private Collection<BoardAccessModel> list;
 
-    public HttpHeaders index() {
-        list = BoardAccessService.findAll();
-        return new DefaultHttpHeaders("index").disableCaching();
-    }
-
-    public HttpHeaders create() {
-        long newId = BoardAccessService.save(boardAccess);
-        String path= ServletActionContext.getRequest().getRequestURL().toString();
-        return new DefaultHttpHeaders("create").withStatus(201).setLocation(path + "/" + Long.toString(newId));
-    }
-
-    public HttpHeaders destroy(){
-        BoardAccessService.delete(id);
-        return new DefaultHttpHeaders("destroy").disableCaching().withStatus(204);
-    }
+//    public HttpHeaders index() {
+//        list = BoardAccessService.findAll();
+//        return new DefaultHttpHeaders("index").disableCaching();
+//    }
+//
+//    public HttpHeaders create() {
+//        long newId = BoardAccessService.save(boardAccess);
+//        String path= ServletActionContext.getRequest().getRequestURL().toString();
+//        return new DefaultHttpHeaders("create").withStatus(201).setLocation(path + "/" + Long.toString(newId));
+//    }
+//
+//    public HttpHeaders destroy(){
+//        BoardAccessService.delete(id);
+//        return new DefaultHttpHeaders("destroy").disableCaching().withStatus(204);
+//    }
 
     @Override
     public Object getModel() {
         return (list != null ? list : boardAccess);
     }
 
-    public BoardAccess getBoardAccess() {
+    public BoardAccessModel getBoardAccess() {
         return boardAccess;
     }
 
-    public void setBoardAccess(BoardAccess boardAccess) {
+    public void setBoardAccess(BoardAccessModel boardAccess) {
         this.boardAccess = boardAccess;
     }
 
@@ -58,11 +48,11 @@ public class BoardsaccessController implements ModelDriven<Object>{
         this.id = id;
     }
 
-    public Collection<BoardAccess> getList() {
+    public Collection<BoardAccessModel> getList() {
         return list;
     }
 
-    public void setList(Collection<BoardAccess> list) {
+    public void setList(Collection<BoardAccessModel> list) {
         this.list = list;
     }
 }

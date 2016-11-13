@@ -1,16 +1,16 @@
-package com.paw.servertrello.persistance.model;
+package com.paw.servertrello.lib;
 
-/**
- * Created by Jakub on 2016-10-24.
- */
-public class UserTable {
+import java.util.List;
+
+public class UserModel {
     private Long id;
     private String fullname;
     private String name;
     private String email;
     private String about;
+    private List<Long> boards;
 
-    public UserTable() {
+    public UserModel() {
     }
 
     public Long getId() {
@@ -51,5 +51,13 @@ public class UserTable {
 
     public void setAbout(String about) {
         this.about = about;
+    }
+
+    public List<Long> getBoards() {
+        return boards;
+    }
+
+    public void setBoards(List<Long> boards) {
+        this.boards = boards;
     }
 }

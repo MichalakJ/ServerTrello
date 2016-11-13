@@ -1,20 +1,12 @@
 package com.paw.servertrello.lib;
 
-import java.util.List;
-
-/**
- * Created by Jakub on 2016-10-24.
- */
-public class BoardAccess {
+public class BoardAccessModel {
     private Long id;
     private Long userId;
     private Long boardId;
 
-
-    public BoardAccess() {
+    public BoardAccessModel() {
     }
-
-
 
     public Long getUserId() {
         return userId;
