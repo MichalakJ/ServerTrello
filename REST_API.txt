@@ -113,23 +113,37 @@ ServerTrello/board/{id}.json
     }
   ],
   "title": "tytuł board1",
-  "userId": 0
+  "userId": 0,
+  "usersAccesses": [
+    {
+      "accessLevel": 0,
+      "boardId": 0,
+      "id": 0,
+      "userId": 0
+    },
+    {
+      "accessLevel": 0,
+      "boardId": 0,
+      "id": 1,
+      "userId": 1
+    }
+  ]
 }
 
 #GET Board
-#http://217.113.235.83:8080/ServerTrello/board/0.json
+#ServerTrello/board/0.json
 
 #GET List
-#http://217.113.235.83:8080/ServerTrello/list/0.json
+#ServerTrello/list/0.json
 
 #GET Listitem
-#http://217.113.235.83:8080/ServerTrello/listitem/0.json
+#ServerTrello/listitem/0.json
 
 #GET Comment
-#http://217.113.235.83:8080/ServerTrello/comment/0.json
+#ServerTrello/comment/0.json
 
 #GET Login to service
-#http://217.113.235.83:8080/ServerTrello/user/0.json
+#ServerTrello/user/0.json
 #in headers:
 	name 	jan.kowalski
 	pass	haslo1234

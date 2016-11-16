@@ -19,6 +19,7 @@ public class BoardModel
     private String title;
     
     @Transient private ArrayList<ListModel> lists;
+    @Transient private ArrayList<BoardaccesstableModel> usersAccesses;
 
     public BoardModel(Long userId, String title) 
     {
@@ -66,5 +67,13 @@ public class BoardModel
 
 	public void setLists(ArrayList<ListModel> lists) {
 		this.lists = lists;
+	}
+
+	public ArrayList<BoardaccesstableModel> getUsersAccesses() {
+		return usersAccesses;
+	}
+
+	public void setUsersAccesses(ArrayList<BoardaccesstableModel> usersAccesses) {
+		this.usersAccesses = usersAccesses;
 	}
 }

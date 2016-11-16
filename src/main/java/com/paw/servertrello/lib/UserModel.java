@@ -14,6 +14,7 @@ public class UserModel
     private String fullname, email, about, profilePic, name, pass;
 
     @Transient private ArrayList<BoardModel> boardsList;
+    @Transient private ArrayList<BoardaccesstableModel> boardsAccesses;
     
     public UserModel(String fullname, String email, String about, String profilePic, String name, String pass) 
     {
@@ -92,6 +93,14 @@ public class UserModel
 
 	public void setBoardsList(ArrayList<BoardModel> boardsList) {
 		this.boardsList = boardsList;
+	}
+
+	public ArrayList<BoardaccesstableModel> getBoardsAccesses() {
+		return boardsAccesses;
+	}
+
+	public void setBoardsAccesses(ArrayList<BoardaccesstableModel> boardsAccesses) {
+		this.boardsAccesses = boardsAccesses;
 	}
 
 }

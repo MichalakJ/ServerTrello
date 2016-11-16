@@ -6,7 +6,7 @@ import org.apache.struts2.convention.annotation.InterceptorRef;
 import java.util.Collection;
 
 @InterceptorRef("myStack")
-public class BoardsaccessController implements ModelDriven<Object>{
+public class BoardsaccesstableController implements ModelDriven<Object>{
     private BoardaccesstableModel boardAccess = new BoardaccesstableModel();
     private Long id;
     private Collection<BoardaccesstableModel> list;

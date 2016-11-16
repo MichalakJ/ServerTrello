@@ -22,5 +22,6 @@
         <mapping class="com.paw.servertrello.lib.ListitemModel"></mapping>
         <mapping class="com.paw.servertrello.lib.CommentModel"></mapping>
         <mapping class="com.paw.servertrello.lib.UserModel"></mapping>
+        <mapping class="com.paw.servertrello.lib.BoardaccesstableModel"></mapping>
     </session-factory>
 </hibernate-configuration>
