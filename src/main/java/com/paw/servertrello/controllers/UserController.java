@@ -1,41 +1,49 @@
 package com.paw.servertrello.controllers;
 
 import com.opensymphony.xwork2.ModelDriven;
+import com.paw.servertrello.actions.BoardService;
+import com.paw.servertrello.actions.UserService;
 import com.paw.servertrello.lib.UserModel;
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.InterceptorRef;
-
+import org.apache.struts2.rest.DefaultHttpHeaders;
+import org.apache.struts2.rest.HttpHeaders;
 
 import java.util.Collection;
 
 @InterceptorRef("myStack")
-public class UserController implements ModelDriven<Object>{
+public class UserController implements ModelDriven<Object>
+{
     private UserModel user = new UserModel();
-    private Long id;
+    private long id;
     private Collection<UserModel> list;
 
-//    public HttpHeaders show() {
-//        System.out.println(id);
-//        user = UserService.find(id);
-//        if(user==null){
-//            return new DefaultHttpHeaders("show").disableCaching().withStatus(404);
-//        }
-//        return new DefaultHttpHeaders("show").disableCaching();
-//    }
+    public HttpHeaders show() 
+    {
+		try
+		{
+			String name = ServletActionContext.getRequest().getHeader("name").toString();
+			String pass = ServletActionContext.getRequest().getHeader("pass").toString();
+			user = UserService.selectUserByName(name);			  
+			if(user.getPass().equals(pass)) 
+			{
+				user.setBoardsList(BoardService.selectBoardsByUserId(user.getUserId()));
+				return new DefaultHttpHeaders("index").disableCaching();
+			}
+			else 
+			{
+				user = null;
+				return new DefaultHttpHeaders("show").disableCaching().withStatus(404);
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			user = null;
+			return new DefaultHttpHeaders("show").disableCaching().withStatus(404);
+		}
+    }	
 
-//    public HttpHeaders create() {
-//        long newId = UserService.save(user);
-//        String path= ServletActionContext.getRequest().getRequestURL().toString();
-//        return new DefaultHttpHeaders("create").withStatus(201).setLocation(path + "/" + Long.toString(newId));
-//    }
-//
-//    public HttpHeaders index() {
-//        list = UserService.findAll();
-//        return new DefaultHttpHeaders("index").disableCaching();
-//    }
-//
-//    public HttpHeaders destroy(){
-//        return new DefaultHttpHeaders("destroy").disableCaching().withStatus(UserService.delete(id));
-//    }
 
     @Override
     public Object getModel() {

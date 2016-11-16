@@ -1,11 +1,11 @@
 package com.paw.servertrello.lib;
 
-public class BoardAccessModel {
+public class BoardaccesstableModel {
     private Long id;
     private Long userId;
     private Long boardId;
 
-    public BoardAccessModel() {
+    public BoardaccesstableModel() {
     }
 
     public Long getUserId() {

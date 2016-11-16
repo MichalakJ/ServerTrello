@@ -1,4 +1,4 @@
-#GET Board
+﻿#GET Board
 ServerTrello/board/{id}.json
 {
   "boardId": 0,
@@ -127,3 +127,9 @@ ServerTrello/board/{id}.json
 
 #GET Comment
 #http://217.113.235.83:8080/ServerTrello/comment/0.json
+
+#GET Login to service
+#http://217.113.235.83:8080/ServerTrello/user/0.json
+#in headers:
+	name 	jan.kowalski
+	pass	haslo1234

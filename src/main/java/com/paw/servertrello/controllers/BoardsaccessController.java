@@ -1,15 +1,15 @@
 package com.paw.servertrello.controllers;
 
 import com.opensymphony.xwork2.ModelDriven;
-import com.paw.servertrello.lib.BoardAccessModel;
+import com.paw.servertrello.lib.BoardaccesstableModel;
 import org.apache.struts2.convention.annotation.InterceptorRef;
 import java.util.Collection;
 
 @InterceptorRef("myStack")
 public class BoardsaccessController implements ModelDriven<Object>{
-    private BoardAccessModel boardAccess = new BoardAccessModel();
+    private BoardaccesstableModel boardAccess = new BoardaccesstableModel();
     private Long id;
-    private Collection<BoardAccessModel> list;
+    private Collection<BoardaccesstableModel> list;
 
 //    public HttpHeaders index() {
 //        list = BoardAccessService.findAll();
@@ -32,11 +32,11 @@ public class BoardsaccessController implements ModelDriven<Object>{
         return (list != null ? list : boardAccess);
     }
 
-    public BoardAccessModel getBoardAccess() {
+    public BoardaccesstableModel getBoardAccess() {
         return boardAccess;
     }
 
-    public void setBoardAccess(BoardAccessModel boardAccess) {
+    public void setBoardAccess(BoardaccesstableModel boardAccess) {
         this.boardAccess = boardAccess;
     }
 
@@ -48,11 +48,11 @@ public class BoardsaccessController implements ModelDriven<Object>{
         this.id = id;
     }
 
-    public Collection<BoardAccessModel> getList() {
+    public Collection<BoardaccesstableModel> getList() {
         return list;
     }
 
-    public void setList(Collection<BoardAccessModel> list) {
+    public void setList(Collection<BoardaccesstableModel> list) {
         this.list = list;
     }
 }

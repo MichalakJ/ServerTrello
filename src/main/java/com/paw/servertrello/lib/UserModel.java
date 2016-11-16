@@ -1,11 +1,11 @@
 package com.paw.servertrello.lib;
 
-import java.util.List;
-
+import java.util.ArrayList;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity(name="Users")
 public class UserModel 
@@ -13,6 +13,8 @@ public class UserModel
 	@Id @GeneratedValue(strategy=GenerationType.AUTO) private long userId;
     private String fullname, email, about, profilePic, name, pass;
 
+    @Transient private ArrayList<BoardModel> boardsList;
+    
     public UserModel(String fullname, String email, String about, String profilePic, String name, String pass) 
     {
     	this.setFullname(fullname);
@@ -82,6 +84,14 @@ public class UserModel
 
 	public void setFullname(String fullname) {
 		this.fullname = fullname;
+	}
+
+	public ArrayList<BoardModel> getBoardsList() {
+		return boardsList;
+	}
+
+	public void setBoardsList(ArrayList<BoardModel> boardsList) {
+		this.boardsList = boardsList;
 	}
 
 }
