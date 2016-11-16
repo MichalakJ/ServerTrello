@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 
 @Entity(name="Comments")
 public class CommentModel 
@@ -12,16 +14,28 @@ public class CommentModel
     private long userId, listItemId;
     private String commentText;
     
-    public CommentModel(long userId, long listItemId, String commentText)
+    private String name;
+    private String fullname;
+    
+    public CommentModel(long commentId, long userId, long listItemId, String commentText, String name, String fullname)
     {
     	this.userId = userId;
     	this.listItemId = listItemId;
     	this.commentText = commentText;
+    	this.name = name;
+    	this.fullname = fullname;
     }
     
     public CommentModel(){
     	
     }
+    
+	public long getCommentId() {
+		return commentId;
+	}
+	public void setCommentId(long commentId) {
+		this.commentId = commentId;
+	}
     
 	public long getUserId() {
 		return userId;
@@ -40,6 +54,22 @@ public class CommentModel
 	}
 	public void setCommentText(String commentText) {
 		this.commentText = commentText;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getFullname() {
+		return fullname;
+	}
+
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
 	}
 
 

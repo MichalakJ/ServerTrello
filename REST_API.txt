@@ -1,148 +1,129 @@
-REST api:  
-#Wszystkie POSTY same generują id dla swoich obiektów i zwracją location header na nowo utworzony obiekt.
-#PUT zastępuje całkowicie obiekt TODO: określić dokładnie logike PUT.
-BOARDS  
-
-GET	  /ServerTrello/boards  
-GET	  /ServerTrello/boards/{id}  
+#GET Board
+ServerTrello/board/{id}.json
 {
-  "id": 1,
+  "boardId": 0,
   "lists": [
     {
-      "boardId": 1,
-      "id": 1,
+      "boardId": 0,
+      "isArchived": false,
+      "listId": 0,
       "listItems": [
         {
-          "cardListId": 1,
-          "id": 1,
-          "title": "card2"
+          "commentsList": [
+            {
+              "commentId": 0,
+              "commentText": "komentarz1",
+              "fullname": "Jan Kowalski",
+              "listItemId": 0,
+              "name": "jan.kowalski",
+              "userId": 0
+            },
+            {
+              "commentId": 0,
+              "commentText": "komentarz2",
+              "fullname": "Stefan Kowalski",
+              "listItemId": 0,
+              "name": "stefan.kowalski",
+              "userId": 1
+            }
+          ],
+          "listId": 0,
+          "listItemId": 0,
+          "title": "tytuł listItem1"
         },
         {
-          "cardListId": 1,
-          "id": 2,
-          "title": "card1"
+          "commentsList": [
+            {
+              "commentId": 0,
+              "commentText": "komentarz3",
+              "fullname": "Jan Kowalski",
+              "listItemId": 1,
+              "name": "jan.kowalski",
+              "userId": 0
+            },
+            {
+              "commentId": 0,
+              "commentText": "komentarz4",
+              "fullname": "Stefan Kowalski",
+              "listItemId": 1,
+              "name": "stefan.kowalski",
+              "userId": 1
+            }
+          ],
+          "listId": 0,
+          "listItemId": 1,
+          "title": "tytuł listItem2"
         }
       ],
-      "title": ""
+      "title": "tytuł list1"
     },
     {
-      "boardId": 1,
-      "id": 4,
-      "listItems": [],
-      "title": ""
+      "boardId": 0,
+      "isArchived": false,
+      "listId": 1,
+      "listItems": [
+        {
+          "commentsList": [
+            {
+              "commentId": 0,
+              "commentText": "komentarz5",
+              "fullname": "Jan Kowalski",
+              "listItemId": 2,
+              "name": "jan.kowalski",
+              "userId": 0
+            },
+            {
+              "commentId": 0,
+              "commentText": "komentarz6",
+              "fullname": "Stefan Kowalski",
+              "listItemId": 2,
+              "name": "stefan.kowalski",
+              "userId": 1
+            }
+          ],
+          "listId": 1,
+          "listItemId": 2,
+          "title": "tytuł listItem3"
+        },
+        {
+          "commentsList": [
+            {
+              "commentId": 0,
+              "commentText": "komentarz7",
+              "fullname": "Jan Kowalski",
+              "listItemId": 3,
+              "name": "jan.kowalski",
+              "userId": 0
+            },
+            {
+              "commentId": 0,
+              "commentText": "komentarz8",
+              "fullname": "Stefan Kowalski",
+              "listItemId": 3,
+              "name": "stefan.kowalski",
+              "userId": 1
+            }
+          ],
+          "listId": 1,
+          "listItemId": 3,
+          "title": "tytuł listItem4"
+        }
+      ],
+      "title": "tytuł list2"
     }
   ],
-  "title": "boardTitle",
-  "usersAccesses": [
-    1
-  ]
+  "title": "tytuł board1",
+  "userId": 0
 }
-DELETE  /ServerTrello/boards/{id}  
-PUT     /ServerTrello/boards/{id}  
-POST	/ServerTrello/boards  
-{
-	  "title":"nowy board"
-} 
 
- 
-CARDLIST
+#GET Board
+#http://217.113.235.83:8080/ServerTrello/board/0.json
 
-GET	    /ServerTrello/cardlist/{id}  
-{
-  "boardId": 1,
-  "id": 1,
-  "listItems": [
-    {
-      "cardListId": 1,
-      "id": 1,
-      "title": "card2"
-    },
-    {
-      "cardListId": 1,
-      "id": 2,
-      "title": "card1"
-    }
-  ],
-  "title": ""
-}
-PUT     /ServerTrello/cardlist/{id}
-POST    /ServerTrello/cardlist  
-{
-	  "title":"nowy cardlist",
-	  "boardId": "1"
-}
-DELETE  /ServerTrello/cardlist/{id}
+#GET List
+#http://217.113.235.83:8080/ServerTrello/list/0.json
 
+#GET Listitem
+#http://217.113.235.83:8080/ServerTrello/listitem/0.json
 
-CARD
-
-GET  /ServerTrello/card/{id}
-{
-  "cardListId": 1,
-  "id": 1,
-  "title": "card2"
-}
-PUT   /ServerTrello/card
-POST  /ServerTrello/card
-{
-  "cardListId": 1,
-  "title": "card2"
-}
-DELETE /ServerTrello/card/{id}
-
-
-BOARDSACCESS
-#endpointy do kontroli który użytkownik ma dostęp do której tablicy.
-#w przyszłości być może typ dostępu?
-GET  /ServerTrello/boardsaccess
-[
-  {
-    "boardId": 1,
-    "id": 1,
-    "userId": 1
-  },
-  {
-    "boardId": 2,
-    "id": 2,
-    "userId": 1
-  }
-]
-POST /ServerTrello/boardsaccess
-  {
-    "boardId": 2,
-    "userId": 3
-  }
-DELETE /ServerTrello/boardsaccess/{id}
-
-USER
-#boards oznacza listę boardów do których użytkownik ma dostęp (dane z board access table).
-GET  /ServerTrello/user/{id}
-{
-  "about": "kisne z tym serwerem",
-  "boards": [
-    1,
-    2
-  ],
-  "email": "a@b.com",
-  "fullname": "test user the mighty",
-  "id": 1,
-  "name": "testUser"
-}
-POST /ServerTrello/user
-{
-  "about": "kisne z tym serwerem",
-  "email": "a@b.com",
-  "fullname": "test user the mighty",
-  "name": "testUser2"
-}
-DELETE /ServerTrello/user/{id}
-
-LOGIN
-#brak sprawdzania hasła. zostanie sprawdzony tylko czy w userach istnieje dany login
-#i zostanie zwrócony location header do danego usera.
-POST /ServerTrello/login
-
-{
-	  "login":"testUser",
-	  "password": "sa"
-}
+#GET Comment
+#http://217.113.235.83:8080/ServerTrello/comment/0.json

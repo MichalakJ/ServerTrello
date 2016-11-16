@@ -2,31 +2,36 @@ package com.paw.servertrello.lib;
 
 import java.util.List;
 
-public class UserModel {
-    private Long id;
-    private String fullname;
-    private String name;
-    private String email;
-    private String about;
-    private List<Long> boards;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+@Entity(name="Users")
+public class UserModel 
+{
+	@Id @GeneratedValue(strategy=GenerationType.AUTO) private long userId;
+    private String fullname, email, about, profilePic, name, pass;
+
+    public UserModel(String fullname, String email, String about, String profilePic, String name, String pass) 
+    {
+    	this.setFullname(fullname);
+    	this.setEmail(email);
+    	this.setAbout(about);
+    	this.setProfilePic(profilePic);
+    	this.setName(name);
+    	this.setPass(pass);
+    }
+ 
     public UserModel() {
     }
 
-    public Long getId() {
-        return id;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getFullname() {
-        return fullname;
-    }
-
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getName() {
@@ -53,11 +58,30 @@ public class UserModel {
         this.about = about;
     }
 
-    public List<Long> getBoards() {
-        return boards;
-    }
+	public String getPass() {
+		return pass;
+	}
 
-    public void setBoards(List<Long> boards) {
-        this.boards = boards;
-    }
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
+
+	public String getProfilePic() {
+		return profilePic;
+	}
+
+	public void setProfilePic(String profilePic) {
+		this.profilePic = profilePic;
+	}
+
+
+	public String getFullname() {
+		return fullname;
+	}
+
+
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
+	}
+
 }

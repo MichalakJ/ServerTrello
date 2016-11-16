@@ -1,6 +1,8 @@
 package com.paw.servertrello.database;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -10,6 +12,7 @@ import com.paw.servertrello.actions.ListService;
 import com.paw.servertrello.lib.BoardModel;
 import com.paw.servertrello.lib.CommentModel;
 import com.paw.servertrello.lib.ListitemModel;
+import com.paw.servertrello.lib.UserModel;
 import com.paw.servertrello.lib.ListModel;
 
 public class Database 
@@ -123,16 +126,24 @@ public class Database
 		}
     }
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+
 	public static CommentModel selectCommentById(Long commentId) 
 	{
     	try
         {
+			String query= " select c.commentId, u.userId, c.listItemId, c.commentText, u.name, u.fullname from Comments c"
+						+ " join Users u on u.userId = c.userId"
+						+ " where c.commentId = "+commentId;		
 			Session session = openSession();
 			@SuppressWarnings("unchecked")
-			ArrayList<CommentModel> commentsList = (ArrayList<CommentModel>) session.createQuery("from Comments p where commentId ="+commentId).getResultList();
-			CommentModel comment = commentsList.get(0);
+			List<Object[]> rawCommentsList = (List<Object[]>) session.createQuery(query).getResultList();
+			ArrayList<CommentModel> commentsList = new ArrayList<CommentModel>();
+			for (Object[] list : rawCommentsList) 
+			{
+				commentsList.add(new CommentModel((long)list[0],(long)list[1],(long)list[2],(String)list[3],(String)list[4],(String)list[5]));
+			}
 			session.close();
-			return comment;
+			return commentsList.get(0);
         }
 		catch (Exception e)
 		{
@@ -145,11 +156,19 @@ public class Database
 	{
     	try
         {
+			String query= " select c.commentId, u.userId, c.listItemId, c.commentText, u.name, u.fullname from Comments c"
+						+ " join Users u on u.userId = c.userId"
+						+ " where listItemId ="+listItemId;	
 			Session session = openSession();
 			@SuppressWarnings("unchecked")
-			ArrayList<CommentModel> comments = (ArrayList<CommentModel>) session.createQuery("from Comments p where listItemId ="+listItemId).getResultList();
+			List<Object[]> rawCommentsList = (List<Object[]>) session.createQuery(query).getResultList();
+			ArrayList<CommentModel> commentsList = new ArrayList<CommentModel>();
+			for (Object[] list : rawCommentsList) 
+			{
+				commentsList.add(new CommentModel((long)list[0],(long)list[1],(long)list[2],(String)list[3],(String)list[4],(String)list[5]));
+			}
 			session.close();
-			return comments;
+			return commentsList;
         }
 		catch (Exception e)
 		{
@@ -158,6 +177,22 @@ public class Database
 		}
 	}
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-
+	public static UserModel selectUserById(Long userId) 
+	{
+    	try
+        {
+			Session session = openSession();
+			@SuppressWarnings("unchecked")
+			ArrayList<UserModel> usersList = (ArrayList<UserModel>) session.createQuery("from Users p where userId ="+userId).getResultList();
+			UserModel user = usersList.get(0);
+			session.close();
+			return user;
+        }
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+	}
 
 }

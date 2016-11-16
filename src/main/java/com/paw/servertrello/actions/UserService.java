@@ -1,6 +1,7 @@
 package com.paw.servertrello.actions;
 
-public class UserService {
+public class UserService 
+{
 
 //    public static UserModel find(Long id) 
 //    {
