@@ -1,4 +1,4 @@
-package com.paw.servertrello.actions;
+package com.paw.servertrello.services;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 import org.hibernate.Session;
 
 import com.paw.servertrello.database.Database;
-import com.paw.servertrello.lib.CommentModel;
+import com.paw.servertrello.models.CommentModel;
 
 public class CommentService
 {

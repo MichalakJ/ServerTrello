@@ -1,4 +1,4 @@
-package com.paw.servertrello.lib;
+package com.paw.servertrello.models;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,12 +8,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Transient;
-import com.paw.servertrello.actions.ListItemService;
+
+import com.paw.servertrello.services.ListItemService;
 
 @Entity(name="Lists")
 public class ListModel 
 {
-	@Id @GeneratedValue(strategy=GenerationType.AUTO) private long listId;
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY) private long listId;
     private long boardId;
     private String title;
     private boolean isArchived;

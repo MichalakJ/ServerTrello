@@ -1,4 +1,4 @@
-package com.paw.servertrello.lib;
+package com.paw.servertrello.models;
 
 import java.util.ArrayList;
 import javax.persistence.Entity;
@@ -6,12 +6,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Transient;
-import com.paw.servertrello.actions.CommentService;
+
+import com.paw.servertrello.services.CommentService;
 
 @Entity(name="ListItems")
 public class ListitemModel 
 {
-	@Id @GeneratedValue(strategy=GenerationType.AUTO) private Long listItemId;
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY) private Long listItemId;
 	private long listId;
 	private String title;
 	

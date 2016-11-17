@@ -1,9 +1,9 @@
-package com.paw.servertrello.actions;
+package com.paw.servertrello.services;
 
 import java.util.ArrayList;
 import org.hibernate.Session;
 import com.paw.servertrello.database.Database;
-import com.paw.servertrello.lib.BoardaccesstableModel;
+import com.paw.servertrello.models.BoardaccesstableModel;
 
 public class BoardaccesstableService 
 {

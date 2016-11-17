@@ -1,7 +1,8 @@
-package com.paw.servertrello.actions;
+package com.paw.servertrello.services;
 
 import com.paw.servertrello.database.Database;
-import com.paw.servertrello.lib.ListitemModel;
+import com.paw.servertrello.models.ListitemModel;
+
 import java.util.ArrayList;
 
 import org.hibernate.Session;

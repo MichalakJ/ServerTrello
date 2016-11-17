@@ -1,4 +1,4 @@
-package com.paw.servertrello.lib;
+package com.paw.servertrello.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,7 +8,7 @@ import javax.persistence.Id;
 @Entity(name="BoardAccessTable")
 public class BoardaccesstableModel
 {
-	@Id @GeneratedValue(strategy=GenerationType.AUTO) private long id;
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY) private long id;
     private long userId, boardId, accessLevel;
 
     public BoardaccesstableModel(long userId, long boardId, long accessLevel) 

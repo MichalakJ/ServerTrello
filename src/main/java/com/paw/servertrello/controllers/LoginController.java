@@ -1,25 +1,37 @@
 package com.paw.servertrello.controllers;
 
 import com.opensymphony.xwork2.ModelDriven;
-import com.paw.servertrello.lib.Credentials;
-import com.paw.servertrello.lib.UserModel;
-import org.apache.struts2.convention.annotation.InterceptorRef;
+import com.paw.servertrello.models.Credentials;
+import com.paw.servertrello.models.UserModel;
+import com.paw.servertrello.services.LoginService;
 
+import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.convention.annotation.InterceptorRef;
+import org.apache.struts2.rest.DefaultHttpHeaders;
+import org.apache.struts2.rest.HttpHeaders;
 
 @InterceptorRef("myStack")
 public class LoginController implements ModelDriven<Object>{
 
     private UserModel user = new UserModel();
     private Credentials credentials = new Credentials();
-//    public HttpHeaders create() {
-//        user = LoginService.login(credentials);
-//        credentials = null;
-//        if(user==null){
-//            return new DefaultHttpHeaders("create").withStatus(403);
-//        }
-//        String path= ServletActionContext.getRequest().getRequestURL().toString().replace("login", "users");
-//        return new DefaultHttpHeaders("create").withStatus(201).setLocation(path + "/" + Long.toString(user.getId()));
-//    }
+    
+    public HttpHeaders show() 
+    {
+    	try
+    	{
+	        user = LoginService.login(credentials);
+	        if(user== null) throw new Exception();
+	        credentials = null;
+	        return new DefaultHttpHeaders("show").disableCaching();
+    	}
+    	catch(Exception e)
+    	{
+    		e.printStackTrace();
+    		return new DefaultHttpHeaders("show").withStatus(403);
+    	}
+    }
+  
     @Override
     public Object getModel() {
         return (credentials != null ? credentials : user);

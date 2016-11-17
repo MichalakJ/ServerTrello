@@ -1,15 +1,17 @@
 package com.paw.servertrello.controllers;
 
 import com.opensymphony.xwork2.ModelDriven;
-import com.paw.servertrello.actions.BoardService;
-import com.paw.servertrello.actions.UserService;
-import com.paw.servertrello.lib.UserModel;
+import com.paw.servertrello.models.UserModel;
+import com.paw.servertrello.services.BoardService;
+import com.paw.servertrello.services.UserService;
+
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.rest.DefaultHttpHeaders;
 import org.apache.struts2.rest.HttpHeaders;
-
+import java.util.ArrayList;
 import java.util.Collection;
+
 
 @InterceptorRef("myStack")
 public class UserController implements ModelDriven<Object>
@@ -17,30 +19,26 @@ public class UserController implements ModelDriven<Object>
     private UserModel user = new UserModel();
     private long id;
     private Collection<UserModel> list;
-
-    public HttpHeaders show() 
+    
+    public HttpHeaders execute() 
     {
-		try
-		{
+    	try
+    	{
+			String fullname = ServletActionContext.getRequest().getHeader("fullname").toString();	
+			String email = ServletActionContext.getRequest().getHeader("email").toString();
 			String name = ServletActionContext.getRequest().getHeader("name").toString();
 			String pass = ServletActionContext.getRequest().getHeader("pass").toString();
-			user = UserService.selectUserByName(name);			  
-			if(user.getPass().equals(pass)) 
-			{
-				user.setBoardsList(BoardService.selectBoardsByUserId(user.getUserId()));
-				return new DefaultHttpHeaders("index").disableCaching();
-			}
-			else 
-			{
-				user = null;
-				return new DefaultHttpHeaders("show").disableCaching().withStatus(404);
-			}
-		}
+			user = new UserModel(fullname, email, name, pass);
+			
+			System.out.println(fullname+" "+email+" "+name+" "+pass);
+		
+	        return new DefaultHttpHeaders("execute").disableCaching();
+			
+    	}
 		catch(Exception e)
 		{
 			e.printStackTrace();
-			user = null;
-			return new DefaultHttpHeaders("show").disableCaching().withStatus(404);
+			return null;
 		}
     }	
 

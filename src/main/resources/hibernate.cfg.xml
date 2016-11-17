@@ -5,8 +5,8 @@
 <hibernate-configuration>
     <session-factory>
 	    <property name="connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
-	    <!--<property name="connection.url">jdbc:sqlserver://192.168.0.100:1433;databaseName=dbTestHibernate;</property>-->
-	    <property name="connection.url">jdbc:sqlserver://217.113.235.83:1433;databaseName=dbPaw;</property>
+	    <!--<property name="connection.url">jdbc:sqlserver://localhost:1433;databaseName=dbpaw_;</property>-->
+	    <property name="connection.url">jdbc:sqlserver://217.113.235.83:1433;databaseName=dbpaw_;</property>
 	    <property name="connection.username">paw_db_user</property>
 	    <property name="connection.password">haslo1234</property>
         <property name="dialect">org.hibernate.dialect.SQLServer2012Dialect</property>  
@@ -17,11 +17,11 @@
         <property name="format_sql">false</property>
         <property name="hibernate.c3p0.timeout">10</property>
  
-        <mapping class="com.paw.servertrello.lib.BoardModel"></mapping>
-        <mapping class="com.paw.servertrello.lib.ListModel"></mapping>
-        <mapping class="com.paw.servertrello.lib.ListitemModel"></mapping>
-        <mapping class="com.paw.servertrello.lib.CommentModel"></mapping>
-        <mapping class="com.paw.servertrello.lib.UserModel"></mapping>
-        <mapping class="com.paw.servertrello.lib.BoardaccesstableModel"></mapping>
+        <mapping class="com.paw.servertrello.models.BoardModel"></mapping>
+        <mapping class="com.paw.servertrello.models.ListModel"></mapping>
+        <mapping class="com.paw.servertrello.models.ListitemModel"></mapping>
+        <mapping class="com.paw.servertrello.models.CommentModel"></mapping>
+        <mapping class="com.paw.servertrello.models.UserModel"></mapping>
+        <mapping class="com.paw.servertrello.models.BoardaccesstableModel"></mapping>
     </session-factory>
 </hibernate-configuration>

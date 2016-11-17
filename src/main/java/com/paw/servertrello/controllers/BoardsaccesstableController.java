@@ -1,7 +1,8 @@
 package com.paw.servertrello.controllers;
 
 import com.opensymphony.xwork2.ModelDriven;
-import com.paw.servertrello.lib.BoardaccesstableModel;
+import com.paw.servertrello.models.BoardaccesstableModel;
+
 import org.apache.struts2.convention.annotation.InterceptorRef;
 import java.util.Collection;
 

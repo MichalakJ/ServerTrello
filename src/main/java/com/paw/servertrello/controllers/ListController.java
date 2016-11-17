@@ -1,8 +1,9 @@
 package com.paw.servertrello.controllers;
 
 import com.opensymphony.xwork2.ModelDriven;
-import com.paw.servertrello.actions.ListService;
-import com.paw.servertrello.lib.ListModel;
+import com.paw.servertrello.models.ListModel;
+import com.paw.servertrello.services.ListService;
+
 import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.rest.DefaultHttpHeaders;
 import org.apache.struts2.rest.HttpHeaders;

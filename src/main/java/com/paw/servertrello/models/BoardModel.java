@@ -1,4 +1,4 @@
-package com.paw.servertrello.lib;
+package com.paw.servertrello.models;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,12 +9,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 
-import com.paw.servertrello.actions.ListService;
+import com.paw.servertrello.services.ListService;
 
 @Entity(name="Boards")
 public class BoardModel 
 {
-	@Id @GeneratedValue(strategy=GenerationType.AUTO) private Long boardId;
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY) private Long boardId;
     private Long userId;
     private String title;
     

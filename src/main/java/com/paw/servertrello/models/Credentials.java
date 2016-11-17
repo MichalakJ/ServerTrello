@@ -1,4 +1,4 @@
-package com.paw.servertrello.lib;
+package com.paw.servertrello.models;
 
 /**
  * Created by Jakub on 2016-10-24.

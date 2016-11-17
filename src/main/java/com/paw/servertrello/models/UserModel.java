@@ -1,6 +1,8 @@
-package com.paw.servertrello.lib;
+package com.paw.servertrello.models;
 
 import java.util.ArrayList;
+
+import javax.annotation.Generated;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,20 +12,23 @@ import javax.persistence.Transient;
 @Entity(name="Users")
 public class UserModel 
 {
-	@Id @GeneratedValue(strategy=GenerationType.AUTO) private long userId;
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY) 
+	private long userId;
     private String fullname, email, about, profilePic, name, pass;
 
     @Transient private ArrayList<BoardModel> boardsList;
     @Transient private ArrayList<BoardaccesstableModel> boardsAccesses;
     
-    public UserModel(String fullname, String email, String about, String profilePic, String name, String pass) 
+    public UserModel(String fullname, String email, String name, String pass) 
     {
     	this.setFullname(fullname);
     	this.setEmail(email);
-    	this.setAbout(about);
-    	this.setProfilePic(profilePic);
     	this.setName(name);
     	this.setPass(pass);
+    	about = "";
+    	profilePic = "";
+    	boardsList = new ArrayList<BoardModel>();
+    	boardsAccesses = new ArrayList<BoardaccesstableModel>();
     }
  
     public UserModel() {
