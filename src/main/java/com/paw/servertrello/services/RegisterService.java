@@ -1,5 +1,7 @@
 package com.paw.servertrello.services;
 
+import java.util.ArrayList;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import com.paw.servertrello.database.Database;
@@ -11,6 +13,9 @@ public class RegisterService
     {
     	try
     	{
+    		ArrayList<UserModel> usersList = UserService.selectAllUsers();
+    		if(usersList.stream().filter(w->w.getName().equals(user.getName())).findAny().get() != null) throw new Exception();
+    		if(usersList.stream().filter(w->w.getEmail().equals(user.getEmail())).findAny().get() != null) throw new Exception();
 	        Session session = Database.openSession();
 	        Transaction tx = session.beginTransaction();
 	        session.save(user);
