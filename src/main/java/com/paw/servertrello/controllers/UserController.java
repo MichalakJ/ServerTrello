@@ -20,29 +20,21 @@ public class UserController implements ModelDriven<Object>
     private long id;
     private Collection<UserModel> list;
     
-    public HttpHeaders execute() 
+    public HttpHeaders show()
     {
-    	try
-    	{
-			String fullname = ServletActionContext.getRequest().getHeader("fullname").toString();	
-			String email = ServletActionContext.getRequest().getHeader("email").toString();
-			String name = ServletActionContext.getRequest().getHeader("name").toString();
-			String pass = ServletActionContext.getRequest().getHeader("pass").toString();
-			user = new UserModel(fullname, email, name, pass);
-			
-			System.out.println(fullname+" "+email+" "+name+" "+pass);
-		
-	        return new DefaultHttpHeaders("execute").disableCaching();
-			
-    	}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			return null;
-		}
-    }	
-
-
+    	user = UserService.find(id);
+        if(user==null){
+            return new DefaultHttpHeaders("show").disableCaching().withStatus(404);
+        }
+        return new DefaultHttpHeaders("show").disableCaching();
+    }
+    
+    public HttpHeaders index()
+    {
+    	 user = UserService.find(id);
+    	 return new DefaultHttpHeaders("index").disableCaching();
+    }
+ 
     @Override
     public Object getModel() {
         return (list != null ? list : user);

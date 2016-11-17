@@ -78,6 +78,7 @@ public class UserService
 			@SuppressWarnings("unchecked")
 			ArrayList<UserModel> usersList = (ArrayList<UserModel>) session.createQuery("from Users p where userId ="+userId).getResultList();
 			UserModel user = usersList.get(0);
+			//user.setBoardsList(BoardService.selectBoardsByUserId(user.getUserId()));
 			user.setBoardsAccesses(BoardaccesstableService.getBoardAccessTableByUserId(user.getUserId()));
 			session.close();
 			return user;

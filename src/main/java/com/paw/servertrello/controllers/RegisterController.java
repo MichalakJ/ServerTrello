@@ -1,63 +1,62 @@
 package com.paw.servertrello.controllers;
 
-import java.util.Collection;
-
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.InterceptorRef;
-import org.apache.struts2.rest.DefaultHttpHeaders;
-import org.apache.struts2.rest.HttpHeaders;
 import com.opensymphony.xwork2.ModelDriven;
+import com.paw.servertrello.models.Credentials;
 import com.paw.servertrello.models.UserModel;
+import com.paw.servertrello.services.LoginService;
 import com.paw.servertrello.services.RegisterService;
+
 
 @InterceptorRef("myStack")
 public class RegisterController implements ModelDriven<Object>
 {
-	private boolean isUserRegistered;
-    private String msg = "";
-    private Collection<Boolean> list;
+    private UserModel user = new UserModel();
+    private Credentials credentials = new Credentials();
     
-    public HttpHeaders show() 
+  
+    
+    public void create()
     {
     	try
     	{
-			String fullname = ServletActionContext.getRequest().getParameter("fullname").toString();	
-			String email = ServletActionContext.getRequest().getParameter("email").toString();
-			String name = ServletActionContext.getRequest().getParameter("name").toString();
-			String pass = ServletActionContext.getRequest().getParameter("pass").toString();
-			UserModel user = new UserModel(fullname, email, name, pass);
-    		isUserRegistered = RegisterService.register(user);
-    		msg = "{msg: "+isUserRegistered+"}";
-	        return new DefaultHttpHeaders("show").disableCaching();
+			user = new UserModel(credentials.getFullname(), credentials.getEmail(), credentials.getLogin(), credentials.getPassword());
+	        if(user== null) throw new Exception();
+	        boolean isUserRegistered = RegisterService.register(user);
+	        if(isUserRegistered == false) throw new Exception();
+	        user = LoginService.login(credentials);
+	        credentials = null;
+	        String pathRaw= ServletActionContext.getRequest().getRequestURL().toString();
+	        String path = pathRaw.replace("register", "user");
+	        ServletActionContext.getResponse().sendRedirect(path + Long.toString(user.getUserId())+".json");
     	}
     	catch(Exception e)
     	{
     		e.printStackTrace();
-    		return new DefaultHttpHeaders("show").withStatus(403);
     	}
     }
+       
     
-    
-	@Override
-	public Object getModel() {
-		 return (list != null ? list : msg);
-	}
-	
-	public String getMsg() {
-		return msg;
-	}
+    @Override
+    public Object getModel() {
+        return (credentials != null ? credentials : user);
+    }
 
-	public void setMsg(String msg) {
-		this.msg = msg;
-	}
+    public UserModel getUser() {
+        return user;
+    }
 
+    public void setUser(UserModel user) {
+        this.user = user;
+    }
 
-	public Collection<Boolean> getList() {
-		return list;
-	}
+    public Credentials getCredentials() {
+        return credentials;
+    }
 
-	public void setList(Collection<Boolean> list) {
-		this.list = list;
-	}
+    public void setCredentials(Credentials credentials) {
+        this.credentials = credentials;
+    }
     
 }
