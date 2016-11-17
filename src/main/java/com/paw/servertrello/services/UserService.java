@@ -30,15 +30,23 @@ public class UserService
 //	
 //	}
 	
-	public static UserModel selectUserByName(String name) throws Exception
+	public static UserModel selectUserByName(String name)
 	{
-		Session session = Database.openSession();
-		@SuppressWarnings("unchecked")
-		ArrayList<UserModel> usersList = (ArrayList<UserModel>) session.createQuery("from Users p where name = '"+name+"'").getResultList();
-		UserModel user = usersList.get(0);
-		user.setBoardsAccesses(BoardaccesstableService.getBoardAccessTableByUserId(user.getUserId()));
-		session.close();
-		return user;
+		try
+		{
+			Session session = Database.openSession();
+			@SuppressWarnings("unchecked")
+			ArrayList<UserModel> usersList = (ArrayList<UserModel>) session.createQuery("from Users p where name = '"+name+"'").getResultList();
+			UserModel user = usersList.get(0);
+			user.setBoardsAccesses(BoardaccesstableService.getBoardAccessTableByUserId(user.getUserId()));
+			session.close();
+			return user;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 	public static ArrayList<UserModel> selectAllUsers() 
@@ -70,7 +78,26 @@ public class UserService
 			@SuppressWarnings("unchecked")
 			ArrayList<UserModel> usersList = (ArrayList<UserModel>) session.createQuery("from Users p where userId ="+userId).getResultList();
 			UserModel user = usersList.get(0);
-			user.setBoardsAccesses(BoardaccesstableService.getBoardAccessTableByUserId(userId));
+			user.setBoardsAccesses(BoardaccesstableService.getBoardAccessTableByUserId(user.getUserId()));
+			session.close();
+			return user;
+        }
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public static UserModel selectUserByEmail(String email)
+	{
+    	try
+        {
+			Session session = Database.openSession();
+			@SuppressWarnings("unchecked")
+			ArrayList<UserModel> usersList = (ArrayList<UserModel>) session.createQuery("from Users p where email ='"+email+"'").getResultList();
+			UserModel user = usersList.get(0);
+			user.setBoardsAccesses(BoardaccesstableService.getBoardAccessTableByUserId(user.getUserId()));
 			session.close();
 			return user;
         }
