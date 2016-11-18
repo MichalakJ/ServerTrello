@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import org.hibernate.Session;
 
 import com.paw.servertrello.database.Database;
+import com.paw.servertrello.models.BoardModel;
+import com.paw.servertrello.models.BoardaccesstableModel;
 import com.paw.servertrello.models.UserModel;
 
 public class UserService 
@@ -14,22 +16,7 @@ public class UserService
 	{
 		return selectUserById(id);
 	}
-//	
-//	public static long save(UserModel user) 
-//	{
-//	
-//	}
-//	
-//	public static Collection<UserModel> findAll() 
-//	{
-//	
-//	}
-//	
-//	public static int delete(Long id) 
-//	{
-//	
-//	}
-	
+
 	public static UserModel selectUserByName(String name)
 	{
 		try
@@ -38,32 +25,11 @@ public class UserService
 			@SuppressWarnings("unchecked")
 			ArrayList<UserModel> usersList = (ArrayList<UserModel>) session.createQuery("from Users p where name = '"+name+"'").getResultList();
 			UserModel user = usersList.get(0);
-			user.setBoardsAccesses(BoardaccesstableService.getBoardAccessTableByUserId(user.getUserId()));
+			user.setBoardsList(getUserBoards(user.getUserId()));
 			session.close();
 			return user;
 		}
 		catch(Exception e)
-		{
-			e.printStackTrace();
-			return null;
-		}
-	}
-	
-	public static ArrayList<UserModel> selectAllUsers() 
-	{
-    	try
-        {
-			Session session = Database.openSession();
-			@SuppressWarnings("unchecked")
-			ArrayList<UserModel> usersList = (ArrayList<UserModel>)session.createQuery("from Users").getResultList();
-			for(int i=0; i<usersList.size(); i++)
-			{
-				usersList.get(i).setBoardsAccesses(BoardaccesstableService.getBoardAccessTableByUserId(usersList.get(i).getUserId()));
-			}		
-			session.close();
-			return usersList;
-        }
-		catch (Exception e)
 		{
 			e.printStackTrace();
 			return null;
@@ -78,8 +44,7 @@ public class UserService
 			@SuppressWarnings("unchecked")
 			ArrayList<UserModel> usersList = (ArrayList<UserModel>) session.createQuery("from Users p where userId ="+userId).getResultList();
 			UserModel user = usersList.get(0);
-			//user.setBoardsList(BoardService.selectBoardsByUserId(user.getUserId()));
-			user.setBoardsAccesses(BoardaccesstableService.getBoardAccessTableByUserId(user.getUserId()));
+			user.setBoardsList(getUserBoards(user.getUserId()));
 			session.close();
 			return user;
         }
@@ -98,7 +63,7 @@ public class UserService
 			@SuppressWarnings("unchecked")
 			ArrayList<UserModel> usersList = (ArrayList<UserModel>) session.createQuery("from Users p where email ='"+email+"'").getResultList();
 			UserModel user = usersList.get(0);
-			user.setBoardsAccesses(BoardaccesstableService.getBoardAccessTableByUserId(user.getUserId()));
+			user.setBoardsList(getUserBoards(user.getUserId()));
 			session.close();
 			return user;
         }
@@ -107,5 +72,19 @@ public class UserService
 			e.printStackTrace();
 			return null;
 		}
+	}
+	
+	private static ArrayList<BoardModel> getUserBoards(long userId) throws Exception
+	{
+		ArrayList<BoardaccesstableModel> bat = BoardaccesstableService.getBoardAccessTableByUserId(userId);
+		ArrayList<BoardModel> boardsList = new ArrayList<BoardModel>();
+		for(int i =0; i<bat.size(); i++)
+		{
+			if(bat.get(i).getUserId() == userId)
+			{
+				boardsList.add(BoardService.selectBoardByIdWithoutLists(bat.get(i).getBoardId()));
+			}
+		}
+		return boardsList;
 	}
 }

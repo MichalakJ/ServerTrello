@@ -12,23 +12,8 @@ public class BoardService
 
     public static BoardModel find(Long boardId) 
     {
-    	return selectBoardById(boardId);
+    	return selectBoardByIdWithLists(boardId);
     }
-
-//    public static long save(BoardModel board) 
-//    {
-//
-//    }
-//
-//    public static void delete(Long id) 
-//    {
-//
-//    }
-//
-//    public static int update(BoardModel board, Long id) 
-//    {
-//
-//    }
     
     public static ArrayList<BoardModel> selectBoardsByUserId(Long userId)
     {
@@ -37,12 +22,6 @@ public class BoardService
 			Session session = Database.openSession();
 			@SuppressWarnings("unchecked")
 			ArrayList<BoardModel> boardList = (ArrayList<BoardModel>) session.createQuery("from Boards p where userId ="+userId).getResultList();		
-			for(int i =0; i<boardList.size(); i++)
-			{
-				long boardId = boardList.get(i).getBoardId();
-				boardList.get(i).setLists(ListService.getListsByBoardId(boardId));
-				boardList.get(i).setUsersAccesses(BoardaccesstableService.getBoardAccessTableByBoardId(boardId));
-			}
 			session.close();
 			return boardList;
         }
@@ -53,17 +32,30 @@ public class BoardService
 		}
     }
     
-    public static BoardModel selectBoardById(Long boardId)
+    public static BoardModel selectBoardByIdWithoutLists(Long boardId)
     {
     	try
         {
 			Session session = Database.openSession();
 			@SuppressWarnings("unchecked")
 			ArrayList<BoardModel> boardList = (ArrayList<BoardModel>) session.createQuery("from Boards p where boardId ="+boardId).getResultList();		
-			BoardModel board = boardList.get(0); //przyjmowanie list do boardów
-			board.setLists(ListService.getListsByBoardId(board.getBoardId()));
-			board.setUsersAccesses(BoardaccesstableService.getBoardAccessTableByBoardId(boardId));
+			BoardModel board = boardList.get(0);
 			session.close();
+			return board;
+        }
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+    }
+    
+    public static BoardModel selectBoardByIdWithLists(Long boardId)
+    {
+    	try
+        {
+    		BoardModel board = selectBoardByIdWithoutLists(boardId);
+			board.setLists(ListService.getListsByBoardId(board.getBoardId()));
 			return board;
         }
 		catch (Exception e)

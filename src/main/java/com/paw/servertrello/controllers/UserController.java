@@ -2,16 +2,11 @@ package com.paw.servertrello.controllers;
 
 import com.opensymphony.xwork2.ModelDriven;
 import com.paw.servertrello.models.UserModel;
-import com.paw.servertrello.services.BoardService;
 import com.paw.servertrello.services.UserService;
-
-import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.rest.DefaultHttpHeaders;
 import org.apache.struts2.rest.HttpHeaders;
-import java.util.ArrayList;
 import java.util.Collection;
-
 
 @InterceptorRef("myStack")
 public class UserController implements ModelDriven<Object>
