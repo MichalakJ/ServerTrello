@@ -37,12 +37,7 @@ public class BoardService
     {
     	try
         {
-			Session session = Database.openSession();
-			@SuppressWarnings("unchecked")
-			ArrayList<BoardModel> boardList = (ArrayList<BoardModel>) session.createQuery("from Boards p where boardId ="+boardId).getResultList();		
-			BoardModel board = boardList.get(0);
-			session.close();
-			return board;
+			return Database.get(BoardModel.class, boardId);
         }
 		catch (Exception e)
 		{
@@ -67,30 +62,16 @@ public class BoardService
     }
 
 	public static long save(BoardModel board) throws Exception {
-		Session session = Database.openSession();
-		Transaction tx = session.beginTransaction();
-		long id = (long) session.save(board);
-		tx.commit();
-		session.close();
-		return id;
+		return Database.persist(board);
 	}
 
 	public static void delete(Long id) throws Exception {
-		Session session = Database.openSession();
-		Transaction tx = session.beginTransaction();
-		BoardModel obj= (BoardModel)session.load(BoardModel.class,id);
-		session.delete(obj);
-		tx.commit();
-		session.close();
+		Database.delete(BoardModel.class, id);
 	}
 
 	public static void update(BoardModel board, Long id) throws Exception {
 		board.setBoardId(id);
-		Session session = Database.openSession();
-		Transaction tx = session.beginTransaction();
-		session.update(board);
-		tx.commit();
-		session.close();
+		Database.update(board);
 	}
 //
 }

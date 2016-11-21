@@ -1,9 +1,6 @@
 package com.paw.servertrello.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity(name="Comments")
 public class CommentModel 
@@ -11,8 +8,10 @@ public class CommentModel
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY) private long commentId;
     private long userId, listItemId;
     private String commentText;
-    
+
+	@Transient
     private String name;
+	@Transient
     private String fullname;
     
     public CommentModel(long commentId, long userId, long listItemId, String commentText, String name, String fullname)

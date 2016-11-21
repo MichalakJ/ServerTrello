@@ -15,9 +15,8 @@ public class CommentService
     	return selectCommentsListByListItemId(listItemId);
     }
     
-    public static CommentModel find(Long commentId) 
-    {
-    	return selectCommentById(commentId);
+    public static CommentModel find(Long commentId) throws Exception {
+    	return Database.get(CommentModel.class, commentId);
     }
 
 //    public static long save(CommentModel comment) 
@@ -85,4 +84,17 @@ public class CommentService
 		}
 	}
 
+    public static long save(CommentModel comment) throws Exception {
+		return Database.persist(comment);
+    }
+
+	public static void delete(Long id) throws Exception {
+		Database.delete(CommentModel.class, id);
+	}
+
+
+	public static void update(CommentModel comment, Long id) throws Exception {
+		comment.setCommentId(id);
+		Database.update(comment);
+	}
 }
