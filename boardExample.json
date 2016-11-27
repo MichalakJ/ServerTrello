@@ -1,0 +1,70 @@
+{
+                    title: "Example Board",
+                    id: 0,
+                    isFav: "fav",
+                    lists: [
+                        {
+                            id: 0,
+                            title: "TO DO",
+                            listItems: [
+                                {
+                                    id: 0,
+                                    title: "Wash dishes",
+                                    labels: "red,green",
+                                    schedule : "data,godzina"
+                                },
+                                {
+                                    id: 1,
+                                    title: "Do something",
+                                    schedule : null,
+                                    comments: [
+                                        {
+                                            id: 0,
+                                            author: "Example User",
+                                            addDate: "04-11-2016 15:01:23",
+                                            text: "Something productive"
+                                        },
+                                        {
+                                            id: 1,
+                                            author: "Anonymous",
+                                            addDate: "04-11-2016 15:40:14",
+                                            text: "Like commenting tasks"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            id: 1,
+                            title: "IN WORK",
+                            listItems: [
+                                {
+                                    id: 0,
+                                    title: "Walk a dog",
+                                    schedule : null
+                                }
+                            ]
+                        },
+                        {
+                            id: 2,
+                            title: "DONE",
+                            listItems: [
+                                {
+                                    id: 0,
+                                    title: "Get some sleep",
+                                    schedule : null
+                                },
+                                {
+                                    id: 1,
+                                    title: "Do nothing",
+                                    schedule : null
+                                },
+                                {
+                                    id: 2,
+                                    title: "Wake up",
+                                    schedule : null
+                                }
+                            ]
+                        }
+                    ]
+                }

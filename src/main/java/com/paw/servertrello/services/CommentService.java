@@ -16,7 +16,7 @@ public class CommentService
     }
     
     public static CommentModel find(Long commentId) throws Exception {
-    	return Database.get(CommentModel.class, commentId);
+    	return selectCommentById(commentId);
     }
 
 //    public static long save(CommentModel comment) 
@@ -34,20 +34,28 @@ public class CommentService
 //
 //    }
     
-    public static CommentModel selectCommentById(Long commentId) 
+    public static CommentModel selectCommentById(Long id) 
 	{
     	try
         {
-			String query= " select c.commentId, u.userId, c.listItemId, c.commentText, u.name, u.fullname from Comments c"
+			String query= " select c.id, u.userId, c.listItemId, c.text, u.fullname, u.name, c.addDate, c.editDate from Comments c"
 						+ " join Users u on u.userId = c.userId"
-						+ " where c.commentId = "+commentId;		
+						+ " where c.id = "+id;		
 			Session session = Database.openSession();
 			@SuppressWarnings("unchecked")
 			List<Object[]> rawCommentsList = (List<Object[]>) session.createQuery(query).getResultList();
 			ArrayList<CommentModel> commentsList = new ArrayList<CommentModel>();
 			for (Object[] list : rawCommentsList) 
 			{
-				commentsList.add(new CommentModel((long)list[0],(long)list[1],(long)list[2],(String)list[3],(String)list[4],(String)list[5]));
+				long commentId = (long)list[0];
+				long userId = (long)list[1];
+				long listItemId = (long)list[2];
+				String text = (String)list[3];
+				String author = (String)list[4] + " ("+(String)list[5]+")";
+				String addDate = (String)list[6];
+				String editDate = (String)list[7];
+				commentsList.add(new CommentModel(commentId, userId, listItemId, text, author, addDate, editDate));
+			
 			}
 			session.close();
 			return commentsList.get(0);
@@ -63,7 +71,7 @@ public class CommentService
 	{
     	try
         {
-			String query= " select c.commentId, u.userId, c.listItemId, c.commentText, u.name, u.fullname from Comments c"
+			String query= " select c.id, u.userId, c.listItemId, c.text, u.fullname, u.name, c.addDate, c.editDate from Comments c"
 						+ " join Users u on u.userId = c.userId"
 						+ " where listItemId ="+listItemId;	
 			Session session = Database.openSession();
@@ -72,7 +80,13 @@ public class CommentService
 			ArrayList<CommentModel> commentsList = new ArrayList<CommentModel>();
 			for (Object[] list : rawCommentsList) 
 			{
-				commentsList.add(new CommentModel((long)list[0],(long)list[1],(long)list[2],(String)list[3],(String)list[4],(String)list[5]));
+				long commentId = (long)list[0];
+				long userId = (long)list[1];
+				String text = (String)list[3];
+				String author = (String)list[4] + " ("+(String)list[5]+")";
+				String addDate = (String)list[6];
+				String editDate = (String)list[7];
+				commentsList.add(new CommentModel(commentId, userId, listItemId, text, author, addDate, editDate));
 			}
 			session.close();
 			return commentsList;
@@ -94,7 +108,7 @@ public class CommentService
 
 
 	public static void update(CommentModel comment, Long id) throws Exception {
-		comment.setCommentId(id);
+		comment.setId(id);
 		Database.update(comment);
 	}
 }

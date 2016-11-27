@@ -5,33 +5,36 @@ import javax.persistence.*;
 @Entity(name="Comments")
 public class CommentModel 
 {
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY) private long commentId;
-    private long userId, listItemId;
-    private String commentText;
-
-	@Transient
-    private String name;
-	@Transient
-    private String fullname;
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY) 
+	private long id;
+	private long userId, listItemId;
+    private String text;
+    private String addDate, editDate;
     
-    public CommentModel(long commentId, long userId, long listItemId, String commentText, String name, String fullname)
+    
+	@Transient
+    private String author;
+    
+    public CommentModel(long id, long userId, long listItemId, String text, String author, String addDate, String editDate)
     {
+    	this.id = id;
     	this.userId = userId;
     	this.listItemId = listItemId;
-    	this.commentText = commentText;
-    	this.name = name;
-    	this.fullname = fullname;
+    	this.text = text;
+    	this.author = author;
+    	this.addDate = addDate;
+    	this.editDate = editDate;
     }
     
     public CommentModel(){
     	
     }
     
-	public long getCommentId() {
-		return commentId;
+	public long getId() {
+		return id;
 	}
-	public void setCommentId(long commentId) {
-		this.commentId = commentId;
+	public void setId(long id) {
+		this.id = id;
 	}
     
 	public long getUserId() {
@@ -46,26 +49,46 @@ public class CommentModel
 	public void setListItemId(long listItemId) {
 		this.listItemId = listItemId;
 	}
-	public String getCommentText() {
-		return commentText;
+	public String getText() {
+		return text;
 	}
-	public void setCommentText(String commentText) {
-		this.commentText = commentText;
-	}
-
-	public String getName() {
-		return name;
+	public void setText(String text) {
+		this.text = text;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public String getAuthor() {
+		return author;
 	}
 
-	public String getFullname() {
-		return fullname;
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 
-	public void setFullname(String fullname) {
-		this.fullname = fullname;
+	/**
+	 * @return the addDate
+	 */
+	public String getAddDate() {
+		return addDate;
+	}
+
+	/**
+	 * @param addDate the addDate to set
+	 */
+	public void setAddDate(String addDate) {
+		this.addDate = addDate;
+	}
+
+	/**
+	 * @return the editDate
+	 */
+	public String getEditDate() {
+		return editDate;
+	}
+
+	/**
+	 * @param editDate the editDate to set
+	 */
+	public void setEditDate(String editDate) {
+		this.editDate = editDate;
 	}
 }

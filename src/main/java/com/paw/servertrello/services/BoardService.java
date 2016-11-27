@@ -51,7 +51,7 @@ public class BoardService
     	try
         {
     		BoardModel board = selectBoardByIdWithoutLists(boardId);
-			board.setLists(ListService.getListsByBoardId(board.getBoardId()));
+			board.setLists(ListService.getListsByBoardId(board.getId()));
 			return board;
         }
 		catch (Exception e)
@@ -70,7 +70,7 @@ public class BoardService
 	}
 
 	public static void update(BoardModel board, Long id) throws Exception {
-		board.setBoardId(id);
+		board.setId(id);
 		Database.update(board);
 	}
 //

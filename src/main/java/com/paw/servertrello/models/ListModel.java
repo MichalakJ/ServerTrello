@@ -3,6 +3,7 @@ package com.paw.servertrello.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,7 +15,8 @@ import com.paw.servertrello.services.ListItemService;
 @Entity(name="Lists")
 public class ListModel 
 {
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY) private long listId;
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY) 
+	@Column(name = "listId") private long id;
     private long boardId;
     private String title;
     private boolean isArchived;
@@ -27,7 +29,7 @@ public class ListModel
         this.boardId = boardId;
 		this.isArchived = isArchived;
 		listItems = new ArrayList<ListitemModel>();
-		listItems = ListItemService.getListItemsByListId(listId);
+		listItems = ListItemService.getListItemsByListId(id);
     }
 
     public ListModel() {
@@ -49,12 +51,12 @@ public class ListModel
         this.title = title;
     }
     
-	public long getListId() {
-		return listId;
+	public long getId() {
+		return id;
 	}
 
-	public void setListId(long listId) {
-		this.listId = listId;
+	public void setId(long id) {
+		this.id = id;
 	}
 	
 	public long getBoardId() {

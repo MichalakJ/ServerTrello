@@ -28,7 +28,7 @@ public class ListService
 			ArrayList<ListModel> listsInBoard = (ArrayList<ListModel>) session.createQuery("from Lists p where boardId ="+boardId).getResultList();	
 			for(int i=0; i<listsInBoard.size(); i++) //przyjmowanie listItemów do list
 			{
-				listsInBoard.get(i).setListItems(ListItemService.getListItemsByListId(listsInBoard.get(i).getListId()));
+				listsInBoard.get(i).setListItems(ListItemService.getListItemsByListId(listsInBoard.get(i).getId()));
 			}
 			session.close();
 			return listsInBoard;
@@ -48,7 +48,7 @@ public class ListService
 			@SuppressWarnings("unchecked")
 			ArrayList<ListModel> listsInBoard = (ArrayList<ListModel>) session.createQuery("from Lists p where listId ="+listId).getResultList();
 			ListModel list = listsInBoard.get(0);
-			list.setListItems(ListItemService.getListItemsByListId(list.getListId()));
+			list.setListItems(ListItemService.getListItemsByListId(list.getId()));
 			session.close();
 			return list;
         }

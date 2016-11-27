@@ -1,6 +1,8 @@
 package com.paw.servertrello.models;
 
 import java.util.ArrayList;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,17 +14,18 @@ import com.paw.servertrello.services.CommentService;
 @Entity(name="ListItems")
 public class ListitemModel 
 {
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY) private Long listItemId;
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY) 
+	@Column(name = "listItemId") private Long id;
 	private long listId;
-	private String title;
+	private String title, labels, schedule;
 	
 	@Transient private ArrayList<CommentModel> commentsList;
-
+	
     public ListitemModel(String title) 
     {
     	this.title = title;
     	commentsList = new ArrayList<CommentModel>();
-    	commentsList = CommentService.getCommentsListByListItemId(listItemId);
+    	commentsList = CommentService.getCommentsListByListItemId(id);
     }
 
     public ListitemModel() {
@@ -37,12 +40,12 @@ public class ListitemModel
 		this.commentsList = commentsList;
 	}
 	
-	public long getListItemId() {
-		return listItemId;
+	public long getId() {
+		return id;
 	}
 
-	public void setListItemId(long listItemId) {
-		this.listItemId = listItemId;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public long getListId() {
@@ -59,6 +62,34 @@ public class ListitemModel
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	/**
+	 * @return the labels
+	 */
+	public String getLabels() {
+		return labels;
+	}
+
+	/**
+	 * @param labels the labels to set
+	 */
+	public void setLabels(String labels) {
+		this.labels = labels;
+	}
+
+	/**
+	 * @return the schedule
+	 */
+	public String getSchedule() {
+		return schedule;
+	}
+
+	/**
+	 * @param schedule the schedule to set
+	 */
+	public void setSchedule(String schedule) {
+		this.schedule = schedule;
 	}
 
 

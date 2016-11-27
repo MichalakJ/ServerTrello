@@ -28,7 +28,7 @@ public class ListItemService {
 			ArrayList<ListitemModel> listItems = (ArrayList<ListitemModel>) session.createQuery("from ListItems p where listId ="+listId).getResultList();
 			for(int i=0; i<listItems.size(); i++) //przyjmowanie komentarzy do listItemów
 			{
-				listItems.get(i).setCommentsList(CommentService.getCommentsListByListItemId(listItems.get(i).getListItemId()));
+				listItems.get(i).setCommentsList(CommentService.getCommentsListByListItemId(listItems.get(i).getId()));
 			}
 			session.close();
 			return listItems;
