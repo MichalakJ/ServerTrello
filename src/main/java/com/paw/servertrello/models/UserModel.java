@@ -1,6 +1,8 @@
 package com.paw.servertrello.models;
 
 import java.util.ArrayList;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,6 +15,7 @@ public class UserModel
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY) 
 	private long userId;
     private String fullname, email, about, profilePic, name, pass;
+    @Column(name = "hashColumn") private String hash;
 
     @Transient private ArrayList<BoardModel> boardsList;
     
@@ -94,5 +97,19 @@ public class UserModel
 
 	public void setBoardsList(ArrayList<BoardModel> boardsList) {
 		this.boardsList = boardsList;
+	}
+
+	/**
+	 * @return the hash
+	 */
+	public String getHash() {
+		return hash;
+	}
+
+	/**
+	 * @param hash the hash to set
+	 */
+	public void setHash(String hash) {
+		this.hash = hash;
 	}
 }
