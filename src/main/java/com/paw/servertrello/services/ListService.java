@@ -58,5 +58,18 @@ public class ListService
 			return null;
 		}
     }
-    
+
+
+	public static long save(ListModel list) throws Exception {
+		return Database.persist(list);
+	}
+
+	public static void delete(Long id) throws Exception {
+		Database.delete(ListModel.class, id);
+	}
+
+	public static void update(ListModel list, Long id) throws Exception {
+		list.setId(id);
+		Database.update(list);
+	}
 }

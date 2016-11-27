@@ -4,6 +4,7 @@ import com.opensymphony.xwork2.ModelDriven;
 import com.paw.servertrello.models.ListModel;
 import com.paw.servertrello.services.ListService;
 
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.rest.DefaultHttpHeaders;
 import org.apache.struts2.rest.HttpHeaders;
@@ -25,15 +26,39 @@ public class ListController implements ModelDriven<Object>
         return new DefaultHttpHeaders("show").disableCaching();
     }
 
-//    public HttpHeaders create() {
-//        long newId = ListService.save(card);
-//        String path= ServletActionContext.getRequest().getRequestURL().toString();
-//        return new DefaultHttpHeaders("create").withStatus(201).setLocation(path + "/" + Long.toString(newId));
-//    }
-//
-//    public HttpHeaders destroy(){
-//        return new DefaultHttpHeaders("destroy").disableCaching().withStatus(ListService.delete(id));
-//    }
+    public HttpHeaders create() {
+        if (card == null) {
+            return new DefaultHttpHeaders("create").withStatus(400);
+        }
+
+        String path = ServletActionContext.getRequest().getRequestURL().toString();
+        try {
+            long newId = ListService.save(card);
+            ServletActionContext.getResponse().sendRedirect(path + "/" + Long.toString(newId));
+            return new DefaultHttpHeaders("create").withStatus(201).setLocation(path + "/" + Long.toString(newId));
+        } catch (Exception e) {
+            return new DefaultHttpHeaders("create").withStatus(409);
+        }
+    }
+
+    public HttpHeaders destroy(){
+        try {
+            ListService.delete(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new DefaultHttpHeaders("destroy").disableCaching().withStatus(404);
+        }
+        return new DefaultHttpHeaders("destroy").disableCaching().withStatus(200);
+    }
+
+    public HttpHeaders update(){
+        try {
+            ListService.update(card, id);
+            return new DefaultHttpHeaders("update").disableCaching().withStatus(200);
+        } catch (Exception e) {
+            return new DefaultHttpHeaders("update").disableCaching().withStatus(409);
+        }
+    }
     
     @Override
     public Object getModel() {

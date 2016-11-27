@@ -1,6 +1,7 @@
 package com.paw.servertrello.services;
 
 import com.paw.servertrello.database.Database;
+import com.paw.servertrello.models.ListModel;
 import com.paw.servertrello.models.ListitemModel;
 
 import java.util.ArrayList;
@@ -58,5 +59,18 @@ public class ListItemService {
 			return null;
 		}
     }
+
+	public static long save(ListitemModel listItem) throws Exception {
+		return Database.persist(listItem);
+	}
+
+	public static void delete(Long id) throws Exception {
+		Database.delete(ListitemModel.class, id);
+	}
+
+	public static void update(ListitemModel list, Long id) throws Exception {
+		list.setId(id);
+		Database.update(list);
+	}
 
 }
