@@ -147,3 +147,53 @@ ServerTrello/board/{id}.json
 #in headers:
 	name 	jan.kowalski
 	pass	haslo1234
+	
+	
+
+SET Accept and Content-Type header to application/json	
+# POST Board
+# ServerTrello/board
+{
+  "title": "board title",
+  "isFav": "fav"
+}
+
+# PUT Board
+# ServerTrello/board/{id}
+{
+  "title": "board title",
+  "isFav": "fav"
+}
+
+# DELETE Board
+# ServerTrello/board/{id}
+
+
+#POST List
+#ServerTrello/list
+{
+  "title": "title5",
+  "isArchived": false,
+  "boardId": "0"
+}
+#PUT, DELETE - jak wyzej
+
+#POST Listitem
+#ServerTrello/listitem
+{
+  "title": "title",
+  "labels": "white",
+  "schedule": "what",
+  "listId": "0"
+}
+#PUT, DELETE, jak wyzej
+
+#POST Comment
+#ServerTrello/comment
+{
+  "userId": "1",
+  "listItemId": "512",
+  "commentText": "test",
+  "addDate": "date",
+  "editDate": "date"
+}
