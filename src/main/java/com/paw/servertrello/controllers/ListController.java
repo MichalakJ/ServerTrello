@@ -37,6 +37,7 @@ public class ListController implements ModelDriven<Object>
             ServletActionContext.getResponse().sendRedirect(path + "/" + Long.toString(newId));
             return new DefaultHttpHeaders("create").withStatus(201).setLocation(path + "/" + Long.toString(newId));
         } catch (Exception e) {
+            e.printStackTrace();
             return new DefaultHttpHeaders("create").withStatus(409);
         }
     }

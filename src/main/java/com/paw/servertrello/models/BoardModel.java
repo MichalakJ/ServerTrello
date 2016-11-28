@@ -1,5 +1,7 @@
 package com.paw.servertrello.models;
 
+import com.paw.servertrello.models.pojo.Archive;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +19,8 @@ public class BoardModel
 	@Column(name = "boardId") private Long id;
     private String title;
     private String isFav;
-    
+
+    @Transient private Archive archive;
     @Transient private ArrayList<ListModel> lists;
 
     public BoardModel(String title) 
@@ -67,4 +70,12 @@ public class BoardModel
 	public void setIsFav(String isFav) {
 		this.isFav = isFav;
 	}
+
+    public Archive getArchive() {
+        return archive;
+    }
+
+    public void setArchive(Archive archive) {
+        this.archive = archive;
+    }
 }

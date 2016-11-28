@@ -1,7 +1,10 @@
 package com.paw.servertrello.services;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import com.paw.servertrello.models.ListModel;
+import com.paw.servertrello.models.pojo.Archive;
 import org.hibernate.Session;
 
 import com.paw.servertrello.database.Database;
@@ -52,6 +55,7 @@ public class BoardService
         {
     		BoardModel board = selectBoardByIdWithoutLists(boardId);
 			board.setLists(ListService.getListsByBoardId(board.getId()));
+			board.setArchive(getArchivesLists(board.getId()));
 			return board;
         }
 		catch (Exception e)
@@ -60,6 +64,21 @@ public class BoardService
 			return null;
 		}
     }
+
+	private static Archive getArchivesLists(Long id) throws Exception {
+		Session session = Database.openSession();
+		ArrayList<ListModel> ListArray = (ArrayList<ListModel>) session.createQuery("from Lists p where boardId ="+id).getResultList();
+		Archive archive = new Archive();
+		ArrayList<Long> list = new ArrayList<>();
+		for (ListModel listModel : ListArray) {
+			if(listModel.getIsArchived()){
+				list.add(listModel.getId());
+			}
+		}
+		archive.setLists(list);
+		session.close();
+		return archive;
+	}
 
 	public static long save(BoardModel board) throws Exception {
 		return Database.persist(board);
