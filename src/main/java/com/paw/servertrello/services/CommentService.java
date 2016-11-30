@@ -111,4 +111,14 @@ public class CommentService
 		comment.setId(id);
 		Database.update(comment);
 	}
+
+    public static void deleteByListItemId(Long id) throws Exception {
+
+		Session session = Database.openSession();
+		ArrayList<CommentModel> comments = (ArrayList<CommentModel>) session.createQuery("from Comments p where listItemId ="+id).getResultList();
+		for (CommentModel comment : comments) {
+			delete(comment.getId());
+		}
+		session.close();
+    }
 }

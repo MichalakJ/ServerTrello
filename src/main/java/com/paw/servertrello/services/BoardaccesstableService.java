@@ -60,4 +60,13 @@ public class BoardaccesstableService
 	public static BoardaccesstableModel find(Long id) throws Exception {
 		return Database.get(BoardaccesstableModel.class, id);
 	}
+
+	public static void deleteByBoardId(Long id) throws Exception {
+		Session session = Database.openSession();
+		ArrayList<BoardaccesstableModel> accesses = (ArrayList<BoardaccesstableModel>) session.createQuery("from BoardAccessTable p where boardId ="+id).getResultList();
+		for (BoardaccesstableModel access : accesses) {
+			delete(access.getId());
+		}
+		session.close();
+	}
 }

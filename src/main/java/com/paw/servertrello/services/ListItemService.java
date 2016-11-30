@@ -65,6 +65,7 @@ public class ListItemService {
 	}
 
 	public static void delete(Long id) throws Exception {
+		CommentService.deleteByListItemId(id);
 		Database.delete(ListitemModel.class, id);
 	}
 
@@ -73,4 +74,12 @@ public class ListItemService {
 		Database.update(list);
 	}
 
+	public static void deleteByListId(Long id) throws Exception {
+		Session session = Database.openSession();
+		ArrayList<ListitemModel> listsWithBoard = (ArrayList<ListitemModel>) session.createQuery("from ListItems p where listId ="+id).getResultList();
+		for (ListitemModel listitemModel : listsWithBoard) {
+			delete(listitemModel.getId());
+		}
+		session.close();
+	}
 }

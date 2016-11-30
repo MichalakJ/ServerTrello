@@ -85,7 +85,10 @@ public class BoardService
 	}
 
 	public static void delete(Long id) throws Exception {
+		ListService.deleteByBoardId(id);
+		BoardaccesstableService.deleteByBoardId(id);
 		Database.delete(BoardModel.class, id);
+
 	}
 
 	public static void update(BoardModel board, Long id) throws Exception {
