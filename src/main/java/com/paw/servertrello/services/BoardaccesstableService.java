@@ -42,4 +42,22 @@ public class BoardaccesstableService
 			return null;
 		}
 	}
+
+
+	public static long save(BoardaccesstableModel board) throws Exception {
+		return Database.persist(board);
+	}
+
+	public static void delete(Long id) throws Exception {
+		Database.delete(BoardaccesstableModel.class, id);
+	}
+
+	public static void update(BoardaccesstableModel board, Long id) throws Exception {
+		board.setId(id);
+		Database.update(board);
+	}
+
+	public static BoardaccesstableModel find(Long id) throws Exception {
+		return Database.get(BoardaccesstableModel.class, id);
+	}
 }
